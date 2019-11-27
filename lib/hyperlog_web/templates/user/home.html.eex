@@ -1,0 +1,15 @@
+<section class="row">
+  <%= if @current_user do %>
+    <p>Hello, <%= @current_user.name %></p>
+    <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
+      <%= submit "Logout", class: "btn btn-danger" %>
+    <% end %>
+
+    <%= if @current_user.discord_connected do %>
+      <p>Discord Connected</p>
+    <% else %>
+      <a class="btn btn-large" href="/auth/discord">Connect to Discord</a>
+    <% end %>
+
+  <% end %>
+</section>
