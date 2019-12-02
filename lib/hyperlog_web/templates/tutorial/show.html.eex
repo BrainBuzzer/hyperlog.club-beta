@@ -1,0 +1,28 @@
+<h1>Show Tutorial</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @tutorial.title %>
+  </li>
+
+  <li>
+    <strong>Difficulty:</strong>
+    <%= @tutorial.difficulty %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @tutorial.description %>
+  </li>
+
+  <li>
+    <strong>Link:</strong>
+    <%= @tutorial.link %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.tutorial_path(@conn, :edit, @tutorial) %></span>
+<span><%= link "Back", to: Routes.tutorial_path(@conn, :index) %></span>

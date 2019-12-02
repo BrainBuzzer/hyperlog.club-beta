@@ -7,6 +7,7 @@ defmodule HyperlogWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug HyperlogWeb.Plugs.Auth
   end
 
   pipeline :api do
@@ -23,6 +24,8 @@ defmodule HyperlogWeb.Router do
     get "/home", UserController, :home
 
     get "/", PageController, :index
+
+  resources "/tutorials", TutorialController
   end
 
   # Other scopes may use custom stacks.

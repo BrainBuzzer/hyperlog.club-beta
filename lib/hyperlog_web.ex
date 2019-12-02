@@ -23,6 +23,7 @@ defmodule HyperlogWeb do
 
       import Plug.Conn
       import HyperlogWeb.Gettext
+      import HyperlogWeb.Plugs.Auth
       alias HyperlogWeb.Router.Helpers, as: Routes
     end
   end

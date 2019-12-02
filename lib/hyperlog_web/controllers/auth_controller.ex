@@ -42,7 +42,7 @@ defmodule HyperlogWeb.AuthController do
   defp sign_in_user(user, conn) do
     conn
     |> put_flash(:info, "Successfully authenticated.")
-    |> put_session(:current_user, user)
+    |> put_session(:current_user_id, user.id)
     |> configure_session(renew: true)
     |> redirect(to: "/home")
   end
@@ -51,7 +51,6 @@ defmodule HyperlogWeb.AuthController do
     Accounts.connect_discord(user, auth)
     conn
     |> put_flash(:info, "Discord connected successfully")
-    |> put_session(:current_user, user)
     |> redirect(to: "/home")
   end
 

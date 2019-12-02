@@ -4,4 +4,5 @@ defmodule HyperlogWeb.UserController do
   def home(conn, _params) do
     render(conn, "home.html", current_user: get_session(conn, :current_user))
   end
+
 end

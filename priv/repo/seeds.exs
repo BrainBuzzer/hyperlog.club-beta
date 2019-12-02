@@ -9,3 +9,13 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Hyperlog.Resources
+
+for category <- ~w(Article Video) do
+  Resources.create_category(category)
+end
+
+for tech <- ~w(JavaScript Python) do
+  Resources.create_technology(tech)
+end

@@ -1,0 +1,32 @@
+<h1>Listing Tutorials</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Difficulty</th>
+      <th>Description</th>
+      <th>Link</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for tutorial <- @tutorials do %>
+    <tr>
+      <td><%= tutorial.title %></td>
+      <td><%= tutorial.difficulty %></td>
+      <td><%= tutorial.description %></td>
+      <td><%= tutorial.link %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.tutorial_path(@conn, :show, tutorial) %></span>
+        <span><%= link "Edit", to: Routes.tutorial_path(@conn, :edit, tutorial) %></span>
+        <span><%= link "Delete", to: Routes.tutorial_path(@conn, :delete, tutorial), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Tutorial", to: Routes.tutorial_path(@conn, :new) %></span>

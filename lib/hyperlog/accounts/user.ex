@@ -12,6 +12,7 @@ defmodule Hyperlog.Accounts.User do
     field :xp, :integer, default: 0
 
     has_one :discord, Hyperlog.Accounts.Discord
+    has_many :tutorials, Hyperlog.Resources.Tutorial
 
     timestamps()
   end
