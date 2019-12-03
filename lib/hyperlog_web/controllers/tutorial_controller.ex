@@ -7,15 +7,15 @@ defmodule HyperlogWeb.TutorialController do
   plug :load_technologies when action in [:new, :create, :edit, :update]
   plug :load_categories when action in [:new, :create, :edit, :update]
 
-  plug HyperlogWeb.Plugs.AuthenticateUser when action not in [:index]
+  plug HyperlogWeb.Plugs.AuthenticateUser when action not in []
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]
     apply(__MODULE__, action_name(conn), args)
   end
 
-  def index(conn, _params, _user) do
-    tutorials = Resources.list_tutorials()
+  def index(conn, _params, user) do
+    tutorials = Resources.get_user_tutorials(user)
     render(conn, "index.html", tutorials: tutorials)
   end
 
@@ -36,19 +36,19 @@ defmodule HyperlogWeb.TutorialController do
     end
   end
 
-  def show(conn, %{"id" => id}, _user) do
-    tutorial = Resources.get_tutorial!(id)
+  def show(conn, %{"id" => id}, user) do
+    tutorial = Resources.get_user_tutorial!(user, id)
     render(conn, "show.html", tutorial: tutorial)
   end
 
-  def edit(conn, %{"id" => id}, _user) do
-    tutorial = Resources.get_tutorial!(id)
+  def edit(conn, %{"id" => id}, user) do
+    tutorial = Resources.get_user_tutorial!(user, id)
     changeset = Resources.change_tutorial(tutorial)
     render(conn, "edit.html", tutorial: tutorial, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "tutorial" => tutorial_params}, _user) do
-    tutorial = Resources.get_tutorial!(id)
+  def update(conn, %{"id" => id, "tutorial" => tutorial_params}, user) do
+    tutorial = Resources.get_user_tutorial!(user, id)
 
     case Resources.update_tutorial(tutorial, tutorial_params) do
       {:ok, tutorial} ->
@@ -61,8 +61,8 @@ defmodule HyperlogWeb.TutorialController do
     end
   end
 
-  def delete(conn, %{"id" => id}, _user) do
-    tutorial = Resources.get_tutorial!(id)
+  def delete(conn, %{"id" => id}, user) do
+    tutorial = Resources.get_user_tutorial!(user, id)
     {:ok, _tutorial} = Resources.delete_tutorial(tutorial)
 
     conn

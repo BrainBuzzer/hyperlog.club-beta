@@ -7,6 +7,7 @@ defmodule Hyperlog.Resources do
   alias Hyperlog.Repo
 
   alias Hyperlog.Resources.Category
+  alias Hyperlog.Accounts
 
   @doc """
   Returns the list of category.
@@ -289,6 +290,22 @@ defmodule Hyperlog.Resources do
   """
   def change_tutorial(%Tutorial{} = tutorial) do
     Tutorial.changeset(tutorial, %{})
+  end
+
+  def get_user_tutorials(%Hyperlog.Accounts.User{} = user) do
+    Tutorial
+    |> user_tutorial_query(user)
+    |> Repo.all
+  end
+
+  def get_user_tutorial!(%Hyperlog.Accounts.User{} = user, id) do
+    Tutorial
+    |> user_tutorial_query(user)
+    |> Repo.get!(id)
+  end
+
+  defp user_tutorial_query(query, %Accounts.User{} = user) do
+    from(t in query, where: t.user_id == ^user.id)
   end
 
 end
