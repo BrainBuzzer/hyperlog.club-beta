@@ -1,15 +1,18 @@
 <section class="row">
-  <%= if @current_user do %>
-    <p>Hello, <%= @current_user.name %></p>
+  <%= if @conn.assigns.user_signed_in? do %>
+    <p>Hello, <%= @conn.assigns.current_user.name %></p>
     <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
       <%= submit "Logout", class: "btn btn-danger" %>
     <% end %>
 
-    <%= if @current_user.discord_connected do %>
+    <%= if @conn.assigns.current_user.discord_connected do %>
       <p>Discord Connected</p>
     <% else %>
       <a class="btn btn-large" href="/auth/discord">Connect to Discord</a>
     <% end %>
+
+  <% else %>
+    <p>What's up?</p>
 
   <% end %>
 </section>

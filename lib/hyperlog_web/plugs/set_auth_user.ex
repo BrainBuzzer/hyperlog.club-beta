@@ -1,4 +1,4 @@
-defmodule HyperlogWeb.Plugs.Auth do
+defmodule HyperlogWeb.Plugs.SetAuth do
   import Plug.Conn
 
   alias Hyperlog.Repo

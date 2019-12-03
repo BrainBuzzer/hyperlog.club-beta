@@ -7,6 +7,8 @@ defmodule HyperlogWeb.TutorialController do
   plug :load_technologies when action in [:new, :create, :edit, :update]
   plug :load_categories when action in [:new, :create, :edit, :update]
 
+  plug HyperlogWeb.Plugs.AuthenticateUser when action not in [:index]
+
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]
     apply(__MODULE__, action_name(conn), args)

@@ -7,7 +7,7 @@ defmodule HyperlogWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug HyperlogWeb.Plugs.Auth
+    plug HyperlogWeb.Plugs.SetAuth
   end
 
   pipeline :api do
