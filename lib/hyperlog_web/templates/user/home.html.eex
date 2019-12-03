@@ -11,6 +11,8 @@
       <a class="btn btn-large" href="/auth/discord">Connect to Discord</a>
     <% end %>
 
+    <a href="/tutorials">Tutorials</a>
+
   <% else %>
     <p>What's up?</p>
 
