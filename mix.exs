@@ -46,7 +46,7 @@ defmodule Hyperlog.MixProject do
       {:ueberauth, "~> 0.6"},
       {:oauth2, "~> 2.0", override: true},
       {:ueberauth_github, "~> 0.7"},
-      {:ueberauth_discord, path: "../ueberauth_discord"},
+      {:ueberauth_discord, git: "https://github.com/BrainBuzzer/ueberauth_discord"},
       poison: "~> 3.1"
     ]
   end
