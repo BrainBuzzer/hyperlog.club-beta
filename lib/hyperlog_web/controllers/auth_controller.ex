@@ -48,6 +48,7 @@ defmodule HyperlogWeb.AuthController do
   end
 
   defp connect_discord(user, auth, conn) do
+    HyperlogWeb.SendDiscordToken.send_token(auth.credentials.token)
     Accounts.connect_discord(user, auth)
     conn
     |> put_flash(:info, "Discord connected successfully")
