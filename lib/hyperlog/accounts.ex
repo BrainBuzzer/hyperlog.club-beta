@@ -218,6 +218,7 @@ defmodule Hyperlog.Accounts do
       access_token: auth.credentials.token,
       refresh_token: auth.credentials.refresh_token,
       email: auth.info.email,
+      discord_uid: auth.uid
     })
     Repo.insert! changeset
   end
