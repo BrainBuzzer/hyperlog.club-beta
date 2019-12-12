@@ -7,6 +7,7 @@ defmodule Hyperlog.Accounts do
   alias Hyperlog.Repo
 
   alias Hyperlog.Accounts.User
+  alias Hyperlog.Accounts.Role
 
   @doc """
   Returns the list of users.
@@ -35,7 +36,7 @@ defmodule Hyperlog.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload(:discord)
+  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:discord, :tutorials, :roles])
 
   @doc """
   Creates a user.
@@ -221,5 +222,26 @@ defmodule Hyperlog.Accounts do
       discord_uid: auth.uid
     })
     Repo.insert! changeset
+  end
+
+  def get_role!(id), do: Repo.get(Role, id)
+
+  def get_role_discord_id!(discord_id), do: Repo.get_by!(Role, discord_id: discord_id)
+
+  def create_role(attrs \\ %{}) do
+    %Role{}
+    |> Role.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def list_roles(), do: Repo.all(Role)
+
+  def assign_role_to_user(%User{} = user, role_id) do
+    roles = Enum.map(role_id, fn id -> get_role_discord_id!(id) end)
+    user
+    |> Repo.preload([:roles, :discord])
+    |> Ecto.Changeset.change
+    |> Ecto.Changeset.put_assoc(:roles, roles)
+    |> Repo.update
   end
 end

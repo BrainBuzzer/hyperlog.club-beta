@@ -1,0 +1,4 @@
+<%= form_for :roles, Routes.user_path(@conn, :assign_role), fn f -> %>
+  <%= multiple_select(f, :roles, Enum.map(@roles, &{&1.name, &1.discord_id}))%>
+  <%= submit "Submit" %>
+<% end %>

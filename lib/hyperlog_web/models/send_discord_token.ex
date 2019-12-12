@@ -9,4 +9,14 @@ defmodule HyperlogWeb.SendDiscordToken do
     AMQP.Basic.publish(channel, "", "discord_tokens", send_data, [content_type: "application/json"])
     AMQP.Connection.close(connection)
   end
+
+  def send_role_data(user_id, roles) do
+    {:ok, connection} = AMQP.Connection.open
+    {:ok, channel} = AMQP.Channel.open(connection)
+
+    {:ok, send_data} = Poison.encode(%{user_id: user_id, roles: roles})
+
+    AMQP.Basic.publish(channel, "", "discord_roles", send_data, [content_type: "application/json"])
+    AMQP.Connection.close(connection)
+  end
 end

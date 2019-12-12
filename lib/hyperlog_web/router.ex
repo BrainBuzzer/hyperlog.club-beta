@@ -22,6 +22,9 @@ defmodule HyperlogWeb.Router do
     post "/logout", AuthController, :delete
 
     get "/home", UserController, :home
+    get "/roles", UserController, :roles
+
+    post "/roles", UserController, :assign_role
 
     get "/", PageController, :index
 

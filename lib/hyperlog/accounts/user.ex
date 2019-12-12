@@ -13,6 +13,7 @@ defmodule Hyperlog.Accounts.User do
 
     has_one :discord, Hyperlog.Accounts.Discord
     has_many :tutorials, Hyperlog.Resources.Tutorial
+    many_to_many :roles, Hyperlog.Accounts.Role, join_through: "users_roles", on_replace: :delete
 
     timestamps()
   end
