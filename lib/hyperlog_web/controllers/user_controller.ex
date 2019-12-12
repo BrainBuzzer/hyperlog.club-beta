@@ -19,18 +19,22 @@ defmodule HyperlogWeb.UserController do
 
   def assign_role(conn, %{"roles" => %{"roles" => received_roles}}) do
     roles = Accounts.list_roles()
-    with {:ok, _user} <- set_role(conn.assigns.current_user, received_roles) do
+    with {:ok, _user} <- add_role(conn.assigns.current_user, received_roles) do
       conn
       |> put_flash(:info, "Role Assigned!")
       |> render("roles.html", roles: roles)
     end
-
   end
 
-  defp set_role(user, roles_id) do
+  defp add_role(user, roles_id) do
     {:ok, user} = Accounts.assign_role_to_user(user, roles_id)
-    HyperlogWeb.SendDiscordToken.send_role_data(user.discord.discord_uid, roles_id)
+    HyperlogWeb.SendDiscordToken.send_role_data(user.discord.discord_uid, roles_id, "ADD_ROLE")
     {:ok, user}
   end
 
+  defp remove_role(user, roles_id) do
+    {:ok, user} = Accounts.unassigns_roles_from_user(user, roles_id)
+    HyperlogWeb.SendDiscordToken.send_role_data(user.discord.discord_uid, roles_id, "REMOVE_ROLE")
+    {:ok, user}
+  end
 end
