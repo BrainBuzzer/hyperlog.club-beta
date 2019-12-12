@@ -28,13 +28,13 @@ defmodule HyperlogWeb.UserController do
 
   defp add_role(user, roles_id) do
     {:ok, user} = Accounts.assign_role_to_user(user, roles_id)
-    HyperlogWeb.SendDiscordToken.send_role_data(user.discord.discord_uid, roles_id, "ADD_ROLE")
+    HyperlogWeb.MessagingQueue.send_role_data(user.discord.discord_uid, roles_id, "ADD_ROLE")
     {:ok, user}
   end
 
   defp remove_role(user, roles_id) do
     {:ok, user} = Accounts.unassigns_roles_from_user(user, roles_id)
-    HyperlogWeb.SendDiscordToken.send_role_data(user.discord.discord_uid, roles_id, "REMOVE_ROLE")
+    HyperlogWeb.MessagingQueue.send_role_data(user.discord.discord_uid, roles_id, "REMOVE_ROLE")
     {:ok, user}
   end
 end

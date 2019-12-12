@@ -1,5 +1,5 @@
-defmodule HyperlogWeb.SendDiscordToken do
-  def send_token(token, user_id) do
+defmodule HyperlogWeb.MessagingQueue do
+  def send_discord_token(token, user_id) do
     {:ok, connection} = AMQP.Connection.open
     {:ok, channel} = AMQP.Channel.open(connection)
 
