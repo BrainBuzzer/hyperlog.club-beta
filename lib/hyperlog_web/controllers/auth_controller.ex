@@ -25,7 +25,6 @@ defmodule HyperlogWeb.AuthController do
             |> put_flash(:warn, "Discord is already connected")
             |> redirect(to: "/home")
           else
-            IO.inspect auth
             connect_discord(user, auth, conn)
           end
         end
@@ -40,11 +39,12 @@ defmodule HyperlogWeb.AuthController do
   end
 
   defp sign_in_user(user, conn) do
+    redirect_path = if user.discord_connected, do: "/home", else: "/connect_discord"
     conn
     |> put_flash(:info, "Successfully authenticated.")
     |> put_session(:current_user_id, user.id)
     |> configure_session(renew: true)
-    |> redirect(to: "/home")
+    |> redirect(to: redirect_path)
   end
 
   defp connect_discord(user, auth, conn) do

@@ -22,6 +22,7 @@ defmodule HyperlogWeb.Router do
     post "/logout", AuthController, :delete
 
     get "/home", UserController, :home
+    get "/connect_discord", UserController, :connect_discord
     get "/roles", UserController, :roles
 
     post "/roles", UserController, :assign_role

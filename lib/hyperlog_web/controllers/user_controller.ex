@@ -12,6 +12,10 @@ defmodule HyperlogWeb.UserController do
     end
   end
 
+  def connect_discord(conn, _params) do
+    render(conn, "discord_conn.html")
+  end
+
   def roles(conn, _params) do
     roles = Accounts.list_roles()
     render(conn, "roles.html", roles: roles)

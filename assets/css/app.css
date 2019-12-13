@@ -36,6 +36,12 @@ body {
 .hero-subhead {
   font-size: 36px;
   margin: 10px 0;
+  text-align: center;
+  line-height: 55px;
+  color: #ffffff;
+}
+
+.color-gray {
   color: #A7A7A7;
 }
 
