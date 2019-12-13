@@ -23,7 +23,7 @@ body {
 }
 
 .hero-img {
-  margin: 20px 0;
+  margin-top: 30px;
 }
 
 .hero-main-headline {
@@ -48,4 +48,15 @@ body {
 
 .hero-cta {
   margin: 10px 0;
+}
+
+.hero-para {
+  text-align: center;
+  font-size: 18px;
+  line-height: 27px;
+  margin: 10px 0;
+}
+
+.gap {
+  margin-right: 20px;
 }
