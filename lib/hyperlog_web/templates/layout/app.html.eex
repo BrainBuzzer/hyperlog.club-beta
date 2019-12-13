@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <img class="logo" src="<%= Routes.static_path(@conn, "/images/hyperlog.png") %>" alt="Logo"/>
+      <a href="/" class="logo"><img class="logo" src="<%= Routes.static_path(@conn, "/images/hyperlog.png") %>" alt="Logo"/></a>
       <%= if @conn.assigns.current_user do %>
         <nav>
           <ul class="nav__links">
@@ -29,7 +29,7 @@
             <li><a href="#">About</a></li>
           </ul>
         </nav>
-        <a class="cta" href="#"><button class="github-button"><i class="fab fa-github-square fa-lg"></i> Sign in with Github</button></a>
+        <a class="cta" href="/auth/github"><button class="github-button"><i class="fab fa-github-square fa-lg"></i> Sign in with Github</button></a>
       <% end %>
     </header>
     <main role="main" class="container">
