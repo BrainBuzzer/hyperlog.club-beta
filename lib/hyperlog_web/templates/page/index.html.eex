@@ -1,15 +1,12 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
-</section>
-
-<section class="row">
-  <%= if @current_user do %>
-    <p>Hello, <%= @current_user.name %></p>
-    <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
-      <%= submit "Logout", class: "btn btn-danger" %>
-    <% end %>
-  <% else %>
-    <a class="btn btn-primary btn-lg" href="/auth/github">Sign in with Github</a>
-  <% end %>
+<section class="hero">
+  <img src="<%= Routes.static_path(@conn, "/images/home_page_illustration.svg") %>" class="hero-img" alt="Home Page illustration">
+  <div class="hero-main-headline">
+    Join the community for developers where learning programming is game!
+  </div>
+  <div class="hero-subhead">
+    Eat. Sleep. Code. Repeat.
+  </div>
+  <div class="hero-cta">
+    <a href="/auth/github"><button class="github-button"><i class="fab fa-github-square fa-lg"></i> Sign in with Github</button></a>
+  </div>
 </section>

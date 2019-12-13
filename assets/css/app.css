@@ -10,3 +10,35 @@ body {
   font-family: 'Titillium Web', sans-serif;
   color: #fff;
 }
+
+.container .hero {
+  display: flex;
+  height: calc(100% - 100px);
+  width: 60%;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.hero-img {
+  margin: 20px 0;
+}
+
+.hero-main-headline {
+  margin: 10px 0;
+  font-size: 48px;
+  text-align: center;
+  font-weight: 600;
+  line-height: 66px;
+}
+
+.hero-subhead {
+  font-size: 36px;
+  margin: 10px 0;
+  color: #A7A7A7;
+}
+
+.hero-cta {
+  margin: 10px 0;
+}
