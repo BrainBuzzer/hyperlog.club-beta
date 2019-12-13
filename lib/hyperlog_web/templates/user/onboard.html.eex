@@ -1,0 +1,27 @@
+<section class="onboard-primary-container">
+  <div class="left">
+    <img src="<%= Routes.static_path(@conn, "/images/role_selection.svg") %>" alt="Role Selection">
+  </div>
+  <div class="right">
+    <div class="box">
+      <div class="heading">
+        Allow us to tailor your experience
+      </div>
+      <div class="questions">
+        <%= form_for :roles, Routes.user_path(@conn, :assign_role), fn f -> %>
+          <div class="question">
+            <%= label(f, :experience_role, "How experienced are you in programming?", class: "question-label") %>
+            <%= select(f, :experience_role, ["Beginner": "653880931320463361", "Intermediate": "653881077118533633", "Experienced": "655131756277530634"], class: "select-css")%>
+          </div>
+          <div class="question">
+            <%= label(f, :position_role, "What describes you the best?", class: "question-label") %>
+            <%= select(f, :position_role, ["Student": "655131817921478676", "Professional": "655131836804104202", "Teacher": "655131795444072457"], class: "select-css")%>
+          </div>
+          <div class="question">
+            <%= submit "Proceed", class: "question-submit primary-button" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

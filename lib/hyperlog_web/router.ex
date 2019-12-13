@@ -23,7 +23,7 @@ defmodule HyperlogWeb.Router do
 
     get "/home", UserController, :home
     get "/connect_discord", UserController, :connect_discord
-    get "/roles", UserController, :roles
+    get "/onboard", UserController, :user_onboard
 
     post "/roles", UserController, :assign_role
 

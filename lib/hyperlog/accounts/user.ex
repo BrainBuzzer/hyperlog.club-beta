@@ -10,6 +10,7 @@ defmodule Hyperlog.Accounts.User do
     field :name, :string
     field :username, :string
     field :xp, :integer, default: 0
+    field :onboard_complete, :boolean, default: false
 
     has_one :discord, Hyperlog.Accounts.Discord
     has_many :tutorials, Hyperlog.Resources.Tutorial
@@ -21,8 +22,8 @@ defmodule Hyperlog.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :username, :avatar, :discord_connected, :xp, :house])
-    |> validate_required([:name, :email, :username, :avatar, :discord_connected, :xp, :house])
+    |> cast(attrs, [:name, :email, :username, :avatar, :discord_connected, :xp, :house, :onboard_complete])
+    |> validate_required([:name, :email, :username, :avatar, :discord_connected, :xp, :house, :onboard_complete])
     |> unique_constraint(:email)
     |> unique_constraint(:username)
   end

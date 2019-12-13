@@ -5,7 +5,11 @@ defmodule HyperlogWeb.UserController do
 
   def home(conn, _params) do
     if conn.assigns.current_user do
-      render(conn, "home.html", current_user: conn.assigns.current_user)
+      if conn.assigns.current_user.onboard_complete do
+        render(conn, "home.html", current_user: conn.assigns.current_user)
+      else
+        redirect(conn, to: "/onboard")
+      end
     else
       conn
       |> redirect(to: "/")
@@ -13,20 +17,27 @@ defmodule HyperlogWeb.UserController do
   end
 
   def connect_discord(conn, _params) do
-    render(conn, "discord_conn.html")
+    if conn.assigns.current_user.discord_connected do
+      redirect(conn, to: "/home")
+    else
+      render(conn, "discord_conn.html")
+    end
   end
 
-  def roles(conn, _params) do
-    roles = Accounts.list_roles()
-    render(conn, "roles.html", roles: roles)
+  def user_onboard(conn, _params) do
+    if conn.assigns.current_user.onboard_complete do
+      redirect(conn, to: "/home")
+    else
+      render(conn, "onboard.html")
+    end
   end
 
-  def assign_role(conn, %{"roles" => %{"roles" => received_roles}}) do
-    roles = Accounts.list_roles()
+  def assign_role(conn, %{"roles" => %{"experience_role" => role1, "position_role" => role2}}) do
+    received_roles = [role1, role2]
     with {:ok, _user} <- add_role(conn.assigns.current_user, received_roles) do
       conn
-      |> put_flash(:info, "Role Assigned!")
-      |> render("roles.html", roles: roles)
+      |> put_flash(:info, "Roles Assigned!")
+      |> render("home.html")
     end
   end
 
