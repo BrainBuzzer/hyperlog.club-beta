@@ -1,0 +1,27 @@
+button.github-button {
+  display: inline-block;
+  border: none;
+  padding: 0.8rem 1.4rem;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  background-image: linear-gradient(180deg, #fafbfc, #eff3f6 90%);
+  font-family: 'Titillium Web', sans-serif;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, 
+              transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 10px;
+  margin-left: 20px;
+}
+
+button.github-button:hover,
+button.github-button:focus {
+  background-image: linear-gradient(180deg, #f0f3f6, #e6ebf1 90%);
+}
+
+button.github-button:active {
+  transform: scale(0.9);
+}

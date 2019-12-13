@@ -6,19 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Hyperlog · Phoenix Framework</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script src="https://kit.fontawesome.com/a0b4631295.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
+      <img class="logo" src="<%= Routes.static_path(@conn, "/images/hyperlog.png") %>" alt="Logo"/>
+      <%= if @conn.assigns.current_user do %>
+        <nav>
+          <ul class="nav__links">
+            <li>Welcome <%= @conn.assigns.current_user.name %>!</li>
+            <li>
+              <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
+                <%= submit "Logout", class: "logout-button" %>
+              <% end %>
+            </li>
           </ul>
         </nav>
-        <a href="http://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
-        </a>
-      </section>
+      <% else %>
+        <nav>
+          <ul class="nav__links">
+            <li><a href="#">How?</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </nav>
+        <a class="cta" href="#"><button class="github-button"><i class="fab fa-github-square fa-lg"></i> Sign in with Github</button></a>
+      <% end %>
     </header>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
