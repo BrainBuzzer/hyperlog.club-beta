@@ -18,7 +18,7 @@ defmodule Hyperlog.Courses do
 
   """
   def list_course do
-    Repo.all(Course)
+    Repo.all(Course) |> Repo.preload([:chapters])
   end
 
   @doc """
@@ -35,7 +35,7 @@ defmodule Hyperlog.Courses do
       ** (Ecto.NoResultsError)
 
   """
-  def get_course!(id), do: Repo.get!(Course, id)
+  def get_course!(id), do: Repo.get!(Course, id) |> Repo.preload([:chapters])
 
   @doc """
   Creates a course.

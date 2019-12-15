@@ -79,3 +79,68 @@
     }
   }
 }
+
+.main-course {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+
+  &__toc {
+    background-color: rgba(0,0,0,0.20);
+    padding: 20px;
+    border-radius: 10px;
+    height: auto;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    &__chapter_name {
+      font-weight: 600;
+      text-align: center;
+      font-size: 20px;
+      padding: 20px 0;
+    }
+
+    &__lesson_name {
+      font-weight: 400;
+      font-size: 18px;
+      padding: 10px 0;
+      padding-left: 0.25em;
+
+      a {
+        color: rgba(255,255,255,0.5);
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &__content {
+    background-color: rgba(0, 0, 0, 0.20);
+    padding: 20px;
+    margin: 0 10px;
+    border-radius: 10px;
+    height: auto;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+
+    &__heading {
+      font-size: 36px;
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    &__content {
+      font-family: 'Inter', sans-serif;
+    }
+  }
+}
+
+@keyframes blinkblink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

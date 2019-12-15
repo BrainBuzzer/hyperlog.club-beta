@@ -1,0 +1,24 @@
+<div class="course-container">
+  <div class="main-course">
+    <div>
+      <div class="main-course__toc">
+        <%= for chapter <- @course.chapters do %>
+          <div class="main-course__toc__chapter_name"><%= chapter.name %></div>
+          <%= for lesson <- chapter.lessons do %>
+            <div class="main-course__toc__lesson_name"><a href="/courses/javascript/<%= lesson.slug %>"><%= lesson.title %></a></div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div>
+      <div class="main-course__content">
+        <div class="main-course__content__heading">
+          Heading
+        </div>
+        <div class="main-course__content__data">
+          Content
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

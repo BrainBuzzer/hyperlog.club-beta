@@ -4,7 +4,7 @@ defmodule Hyperlog.Repo.Migrations.CreateChapter do
   def change do
     create table(:chapter) do
       add :name, :string
-      add :course_id, references(:course, on_delete: :nothing)
+      add :course_id, references(:course, on_delete: :delete_all)
 
       add :lessons, {:array, :map}, default: []
 

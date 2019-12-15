@@ -5,7 +5,7 @@ defmodule Hyperlog.Courses.Lesson do
   embedded_schema do
     field :title
     field :content
-    field :difficulty
+    field :difficulty, :integer
     field :slug
     field :type
   end
