@@ -29,7 +29,9 @@ defmodule HyperlogWeb.Router do
 
     get "/", PageController, :index
 
-  resources "/tutorials", TutorialController
+    resources "/tutorials", TutorialController
+
+    get "/courses", CourseController, :index
   end
 
   # Other scopes may use custom stacks.

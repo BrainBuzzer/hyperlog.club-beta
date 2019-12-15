@@ -1,0 +1,27 @@
+<section class="course-container">
+  <div class="hero-course">
+    <div class="hero-course__illustration">
+      <img src="<%= Routes.static_path(@conn, "/images/courses_illustration.svg") %>" alt="Course Illustration" />
+    </div>
+    <div class="hero-course__info">
+      <div class="hero-course__heading">Checkout the courses</div>
+      <div class="hero-course__subheading">We have curated some courses to make learning fun. These courses also increase your XPs if you are a beginner. So be sure to check them out!</div>
+    </div>
+  </div>
+
+  <div class="course-list">
+    <a class="course-list__item" href="#">
+      <div class="course-list__item__image">
+        <img src="<%= Routes.static_path(@conn, "/images/javascript-logo.svg") %>" alt="JavaScript Logo" />
+      </div>
+      <div class="course-list__item__info">
+        <div class="course-list__item__info__heading">
+          JavaScript Course
+        </div>
+        <div class="course-list__item__info__subheading">
+          Learn from the basics to complete advanced level and become a JavaScript Ninja.
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
