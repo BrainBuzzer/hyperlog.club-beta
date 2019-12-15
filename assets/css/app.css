@@ -1,11 +1,12 @@
 /* This file is for your main application css. */
+@import url('https://rsms.me/inter/inter.css');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
 @import "./reset.css";
 @import "./navbar.css";
 @import "./buttons.css";
 @import "./onboard.css";
 @import "./tutorial.css";
 @import "./course.css";
-@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
 
 body {
   background-color: #1f2327;

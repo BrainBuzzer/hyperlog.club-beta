@@ -197,4 +197,13 @@ defmodule Hyperlog.Courses do
   def change_chapter(%Chapter{} = chapter) do
     Chapter.changeset(chapter, %{})
   end
+
+  def get_chapter_by_slug(chapter_slug) do
+    Repo.get_by(Chapter, slug: chapter_slug)
+  end
+
+  def get_lesson_by_slug(chapter_slug, lesson_slug) do
+    chapter = get_chapter_by_slug(chapter_slug)
+    Enum.find(chapter.lessons, fn lesson -> lesson.slug == lesson_slug end)
+  end
 end

@@ -32,7 +32,7 @@ defmodule HyperlogWeb.Router do
     resources "/tutorials", TutorialController
 
     get "/courses", CourseController, :index
-    get "/courses/javascript/:slug", CourseController, :javascript_course_start
+    get "/courses/javascript/:chapter_slug/:lesson_slug", CourseController, :javascript_course_start
   end
 
   # Other scopes may use custom stacks.

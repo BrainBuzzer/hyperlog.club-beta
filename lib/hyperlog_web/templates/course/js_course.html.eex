@@ -13,10 +13,10 @@
     <div>
       <div class="main-course__content">
         <div class="main-course__content__heading">
-          Heading
+          <%= @lesson.title %>
         </div>
         <div class="main-course__content__data">
-          Content
+          <%= @lesson.content %>
         </div>
       </div>
     </div>

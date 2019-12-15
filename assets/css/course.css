@@ -130,8 +130,9 @@
       text-align: center;
     }
 
-    &__content {
+    &__data {
       font-family: 'Inter', sans-serif;
+      padding-top: 20px;
     }
   }
 }
