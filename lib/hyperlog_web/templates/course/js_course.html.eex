@@ -5,7 +5,7 @@
         <%= for chapter <- @course.chapters do %>
           <div class="main-course__toc__chapter_name"><%= chapter.name %></div>
           <%= for lesson <- chapter.lessons do %>
-            <div class="main-course__toc__lesson_name"><a href="/courses/javascript/<%= lesson.slug %>"><%= lesson.title %></a></div>
+            <div class="main-course__toc__lesson_name"><a href="/courses/javascript/<%= chapter.slug %>/<%= lesson.slug %>"><%= lesson.title %></a></div>
           <% end %>
         <% end %>
       </div>
