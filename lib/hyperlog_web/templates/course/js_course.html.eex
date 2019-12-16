@@ -16,7 +16,7 @@
           <%= @lesson.title %>
         </div>
         <div class="main-course__content__data">
-          <%= @lesson.content %>
+          <%= {:safe, Earmark.as_html!(@lesson.content)} %>
         </div>
       </div>
     </div>

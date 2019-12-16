@@ -48,6 +48,7 @@ defmodule Hyperlog.MixProject do
       {:ueberauth_github, "~> 0.7"},
       {:ueberauth_discord, git: "https://github.com/BrainBuzzer/ueberauth_discord"},
       {:amqp, "~> 1.0"},
+      {:earmark, "~> 1.4.3"},
       poison: "~> 3.1"
     ]
   end
