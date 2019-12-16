@@ -22,6 +22,10 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :hyperlog, HyperlogWeb.Mailer,
+  adapter: Bamboo.SendGridAdapter,
+  api_key: System.get_env("SENDGRID_API_KEY")
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
