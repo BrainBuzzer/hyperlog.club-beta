@@ -1,0 +1,16 @@
+.profile-page-box {
+  max-width: 300px;
+  margin: 0 auto;
+  margin-top: 50px;
+
+  h1 {
+    font-size: 1.4rem;
+    padding: 10px;
+  }
+
+  img {
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+}

@@ -2,6 +2,7 @@
 @import url('https://rsms.me/inter/inter.css');
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
 @import "./reset.css";
+@import "./profile.css";
 @import "./navbar.css";
 @import "./buttons.css";
 @import "./onboard.css";
