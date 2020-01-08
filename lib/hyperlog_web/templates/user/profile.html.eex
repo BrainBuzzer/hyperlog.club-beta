@@ -1,0 +1,15 @@
+<div>
+<!-- Profile Page -->
+<h1>Profile Page</h1>
+<!-- User Avatar -->
+<img src="<%= @user.avatar %>" />
+<!-- Email -->
+<p>User Email : <%= @user.email %></p>
+<!-- Name of the User -->
+<p>User Name : <%= @user.name %></p>
+<!-- Discord Roles Switching -->
+<!-- Delete Account Option-->
+<%= form_for :delete_user, Routes.user_path(@conn, :delete_user_profile), fn f -> %>
+<%= submit "Delete User Account" %>
+<%= end %>
+</div>

@@ -33,6 +33,9 @@ defmodule HyperlogWeb.Router do
 
     get "/courses", CourseController, :index
     get "/courses/javascript/:chapter_slug/:lesson_slug", CourseController, :javascript_course_start
+
+    get "/profile", UserController, :profile_page
+    post "/profile/delete", UserController, :delete_user_profile
   end
 
   # Other scopes may use custom stacks.

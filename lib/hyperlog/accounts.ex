@@ -79,15 +79,16 @@ defmodule Hyperlog.Accounts do
 
   ## Examples
 
-      iex> delete_user(user)
+      iex> delete_user(id)
       {:ok, %User{}}
 
-      iex> delete_user(user)
+      iex> delete_user(id)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_user(%User{} = user) do
-    Repo.delete(user)
+  def delete_user(id) do
+    get_user!(id)
+    |> Repo.delete()
   end
 
   @doc """

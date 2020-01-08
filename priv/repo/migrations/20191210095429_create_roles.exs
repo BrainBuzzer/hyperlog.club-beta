@@ -5,7 +5,7 @@ defmodule Hyperlog.Repo.Migrations.CreateRoles do
     create table(:roles) do
       add :name, :string
       add :discord_id, :string
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :delete_all)
 
       timestamps()
     end

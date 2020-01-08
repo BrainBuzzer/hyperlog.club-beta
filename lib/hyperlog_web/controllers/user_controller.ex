@@ -47,6 +47,25 @@ defmodule HyperlogWeb.UserController do
     {:ok, user}
   end
 
+  def profile_page(conn, _params) do
+    if conn.assigns.current_user do
+      render(conn, "profile.html", user: conn.assigns.current_user)
+    else
+      redirect(conn, to: "/login")
+    end
+  end
+
+  def delete_user_profile(conn, _params) do
+    if conn.assigns.current_user do
+      Accounts.delete_user(conn.assigns.current_user.id)
+      conn
+      |> put_flash(:info, "Account deleted successfully")
+      |> redirect(to: "/")
+    else
+      redirect(conn, to: "/")
+    end
+  end
+
   # defp remove_role(user, roles_id) do
   #   {:ok, user} = Accounts.unassigns_roles_from_user(user, roles_id)
   #   HyperlogWeb.MessagingQueue.send_role_data(user.discord.discord_uid, roles_id, "REMOVE_ROLE")
