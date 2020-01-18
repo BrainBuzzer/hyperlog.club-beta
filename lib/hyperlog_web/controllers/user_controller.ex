@@ -66,6 +66,10 @@ defmodule HyperlogWeb.UserController do
     end
   end
 
+  def user_overview_page(conn, %{"username" => username}) do
+    render(conn, "overview.html", username: username)
+  end
+
   # defp remove_role(user, roles_id) do
   #   {:ok, user} = Accounts.unassigns_roles_from_user(user, roles_id)
   #   HyperlogWeb.MessagingQueue.send_role_data(user.discord.discord_uid, roles_id, "REMOVE_ROLE")

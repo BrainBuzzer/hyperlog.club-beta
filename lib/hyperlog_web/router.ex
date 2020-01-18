@@ -36,6 +36,8 @@ defmodule HyperlogWeb.Router do
 
     get "/profile", UserController, :profile_page
     post "/profile/delete", UserController, :delete_user_profile
+
+    get "/u/:username", UserController, :user_overview_page
   end
 
   # Other scopes may use custom stacks.
