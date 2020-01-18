@@ -107,11 +107,11 @@ defmodule Hyperlog.Accounts do
   def get_or_create_user(user = %{email: email}) do
     case Repo.get_by(User, %{email: email}) do
       user = %User{} -> {:ok, user}
-      nil -> create_user_and_send_email(user)
+      nil -> create_user_procedure(user)
     end
   end
 
-  defp create_user_and_send_email(user) do
+  defp create_user_procedure(user) do
     {:ok, user} = create_user(user)
     HyperlogWeb.Email.welcome_email(user.email) |> HyperlogWeb.Mailer.deliver_now()
     {:ok, user}
