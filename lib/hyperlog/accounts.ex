@@ -36,7 +36,7 @@ defmodule Hyperlog.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:discord, :tutorials, :roles])
+  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:discord, :roles])
 
   @doc """
   Creates a user.

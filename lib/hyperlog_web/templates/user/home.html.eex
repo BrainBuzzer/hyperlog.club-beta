@@ -4,10 +4,10 @@
     Thank you for joining the community!
   </div>
   <div class="hero-para">
-    We are still in early stage. We will keep you updated with all the new stuff we add to the website so be sure to check you email periodically. Till then, why don’t you head over to Discord and introduce yourselves? Or maybe checkout the tutorials for the technology of your choice!
+    We are still in early stage. We will keep you updated with all the new stuff we add to the website so be sure to check you email periodically. Till then, why don’t you head over to Discord and introduce yourselves? Or maybe checkout some of our courses!
   </div>
   <div class="hero-cta">
     <a href="https://discordapp.com/app" class="gap"><button class="discord-button"><i class="fab fa-discord fa-lg"></i> Go to Discord</button></a>
-    <a href="/tutorials"><button class="primary-button">Check Tutorials</button></a>
+    <a href="/courses"><button class="primary-button">Check Courses</button></a>
   </div>
 </section>

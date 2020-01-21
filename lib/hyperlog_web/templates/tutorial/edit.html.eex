@@ -1,8 +1,0 @@
-<div class="tutorials">
-  <div class="tutorials-row">
-    <div class="heading"><a class="back-link" href="<%= Routes.tutorial_path(@conn, :index) %>"><i class="fas fa-arrow-left"></i></a> Edit Tutorial</div>
-  </div>
-  <div class="tutorials-form">
-    <%= render "form.html", Map.put(assigns, :action, Routes.tutorial_path(@conn, :update, @tutorial)) %>
-  </div>
-</div>

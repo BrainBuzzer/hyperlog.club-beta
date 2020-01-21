@@ -29,8 +29,6 @@ defmodule HyperlogWeb.Router do
 
     get "/", PageController, :index
 
-    resources "/tutorials", TutorialController
-
     get "/courses", CourseController, :index
     get "/courses/javascript/:chapter_slug/:lesson_slug", CourseController, :javascript_course_start
 
