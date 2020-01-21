@@ -51,9 +51,10 @@ defmodule Hyperlog.Project do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_meta_data(attrs \\ %{}) do
+  def create_project(%Hyperlog.Accounts.User{} = user, attrs \\ %{}) do
     %MetaData{}
     |> MetaData.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:user, user)
     |> Repo.insert()
   end
 

@@ -2,10 +2,10 @@ Create a new Project
 
 <div class="list-select-projects">
   <%= for repo <- @repos do %>
-    <div class="project-selection-individual">
+    <a class="project-selection-individual" href=<%= "/projects/create/#{repo["name"]}" %>>
       <div class="project-selection-individual__name"><%= repo["full_name"] %></div>
       <div class="project-selection-individual__stars"><%= repo["stargazers_count"] %> <i class="fa fa-star"></i></div>
       <div class="project-selection-individual__description"><%= repo["description"] %></div>
-    </div>
+    </a>
   <% end %>
 </div>

@@ -16,7 +16,7 @@ defmodule Hyperlog.Project.MetaData do
   def changeset(meta_data, attrs) do
     meta_data
     |> cast(attrs, [:name, :description, :link])
-    |> validate_required([:name, :description, :link])
+    |> validate_required([:name, :link])
     |> unique_constraint(:link)
   end
 end
