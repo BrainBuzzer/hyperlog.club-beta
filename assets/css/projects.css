@@ -1,0 +1,40 @@
+.list-select-projects {
+  border: 1px solid #000;
+  border-radius: 10px;
+  width: 400px;
+  margin: 0 auto;
+  background-color: #1f2327;
+}
+
+.project-selection-individual {
+  padding: 10px;
+  border-bottom: 1px solid #000;
+  display: grid;
+  grid-template-columns: 1fr 50px;
+  grid-template-rows: 1fr 1fr;
+  transition: background 10ms ease-in-out, 
+              transform 150ms ease;
+ 
+
+  &__name {
+    padding: 5px;
+  }
+
+  &__description {
+    padding: 5px;
+    color: rgba(255,255,255,0.4)
+  }
+
+  &__stars {
+    text-align: center;
+  }
+
+  &:hover {
+    box-shadow: 6px 10px 31px 0px rgba(0,0,0,0.75);
+    transform: scale(1.1);
+    background-color: #1f2327;
+    border: 1px solid #222;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}

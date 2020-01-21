@@ -7,6 +7,7 @@
 @import "./buttons.css";
 @import "./onboard.css";
 @import "./course.css";
+@import "./projects.css";
 
 body {
   background-color: #1f2327;
