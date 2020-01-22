@@ -2,10 +2,12 @@ defmodule Hyperlog.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  use Pow.Ecto.Schema
+
   schema "users" do
+    pow_user_fields()
     field :avatar, :string
     field :discord_connected, :boolean, default: false
-    field :email, :string
     field :house, :string, default: "None"
     field :name, :string
     field :username, :string

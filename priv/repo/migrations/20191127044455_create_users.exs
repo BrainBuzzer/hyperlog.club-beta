@@ -3,8 +3,9 @@ defmodule Hyperlog.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
+      add :email, :string, null: false
+      add :password_hash, :string
       add :name, :string
-      add :email, :string
       add :username, :string
       add :avatar, :string
       add :discord_connected, :boolean, default: false, null: false
