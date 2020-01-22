@@ -1,0 +1,19 @@
+.user-profile {
+  display: grid;
+  width: 80%;
+  margin: 0 auto;
+  grid-template-columns: 300px 1fr;
+  margin-top: 50px;
+
+  .user-sidebar {
+    box-shadow: 6px 10px 31px 0px rgba(0,0,0,0.75);
+    height: auto;
+    padding: 15px;
+    background-color: #1f2327;
+    border-radius: 5px;
+ 
+    .user-profile-pic {
+      border-radius: 15px;
+    }
+  }
+}

@@ -67,7 +67,8 @@ defmodule HyperlogWeb.UserController do
   end
 
   def user_overview_page(conn, %{"username" => username}) do
-    render(conn, "overview.html", username: username)
+    user = Accounts.get_user_by_username(username)
+    render(conn, "overview.html", user: user)
   end
 
   # defp remove_role(user, roles_id) do

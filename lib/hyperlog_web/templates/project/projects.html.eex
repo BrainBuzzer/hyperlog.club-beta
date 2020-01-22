@@ -1,0 +1,7 @@
+<%= if @projects != nil do %>
+  Projects Exist for this user!
+<% else %>
+  There are no projects for this user. Please create a project.
+
+  <a href="/projects/create">Create a project</a>
+<% end %>

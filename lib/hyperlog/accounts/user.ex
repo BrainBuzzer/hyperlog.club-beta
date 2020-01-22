@@ -13,6 +13,7 @@ defmodule Hyperlog.Accounts.User do
     field :onboard_complete, :boolean, default: false
 
     has_one :discord, Hyperlog.Accounts.Discord
+    has_many :projects, Hyperlog.Project.MetaData
     many_to_many :roles, Hyperlog.Accounts.Role, join_through: "users_roles", on_replace: :delete
 
     timestamps()

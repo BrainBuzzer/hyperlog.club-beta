@@ -14,7 +14,8 @@
       <%= if @conn.assigns.current_user do %>
         <nav>
           <ul class="nav__links">
-            <li>Welcome <%= @conn.assigns.current_user.name %>!</li>
+            <li><a href="<%= "/u/#{@conn.assigns.current_user.username}" %>">Profile</li>
+            <li><a href="/courses">Courses</a></li>
             <li>
               <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
                 <%= submit "Logout", class: "logout-button" %>
@@ -33,8 +34,12 @@
       <% end %>
     </header>
     <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= if get_flash(@conn, :info) do %>
+        <p class="info-msg" role="alert"><%= get_flash(@conn, :info) %></p>
+      <% end %>
+      <%= if get_flash(@conn, :error) do %>
+        <p class="error-msg" role="alert"><%= get_flash(@conn, :error) %></p>
+      <% end %>
       <%= render @view_module, @view_template, assigns %>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
