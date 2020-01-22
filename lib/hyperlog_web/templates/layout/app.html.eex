@@ -14,7 +14,8 @@
       <%= if @conn.assigns.current_user do %>
         <nav>
           <ul class="nav__links">
-            <li>Welcome <%= @conn.assigns.current_user.name %>!</li>
+            <li><a href="<%= "/u/#{@conn.assigns.current_user.username}" %>">Profile</li>
+            <li><a href="/courses">Courses</a></li>
             <li>
               <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
                 <%= submit "Logout", class: "logout-button" %>
