@@ -8,6 +8,9 @@ User does not exists
   </div>
   <div>
   <h4 style="text-align: center">User Projects</h4>
+  <%= if @conn.assigns.current_user.username == @user.username do %>
+    <a href="/projects/create"><button class="primary-button">New Project</button></a>
+  <% end %>
   <div class="list-select-projects">
   <%= for project <- @user.projects do %>
     <a class="project-selection-individual" href=<%= "/project/#{project.id}" %>>
