@@ -30,6 +30,8 @@ defmodule HyperlogWeb.Router do
     get "/projects/create/:repo_name", ProjectController, :user_create_project_new
     post "/projects/create", ProjectController, :user_create_new_project_post
 
+    get "/project/:project_id", ProjectController, :user_project_show
+
     post "/roles", UserController, :assign_role
 
     get "/", PageController, :index

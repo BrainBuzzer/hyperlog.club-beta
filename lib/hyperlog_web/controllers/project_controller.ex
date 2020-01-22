@@ -53,4 +53,9 @@ defmodule HyperlogWeb.ProjectController do
         render(conn, "create.html", changeset: changeset)
     end
   end
+
+  def user_project_show(conn, %{"project_id" => project_id}) do
+    project = Project.get_meta_data!(project_id)
+    render(conn, "show.html", project: project)
+  end
 end
