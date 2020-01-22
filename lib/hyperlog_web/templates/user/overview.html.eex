@@ -1,1 +1,22 @@
-Overview Page: <%= @username %>
+<%= if @user == nil do %>
+User does not exists
+<% else %>
+<div class="user-profile">
+  <div class="user-sidebar">
+    <img src="<%= @user.avatar %>" alt="<%= @user.name %>" class="user-profile-pic" />
+    <h3><%= @user.name %></h3>
+  </div>
+  <div>
+  <h4 style="text-align: center">User Projects</h4>
+  <div class="list-select-projects">
+  <%= for project <- @user.projects do %>
+    <a class="project-selection-individual" href=<%= "/project/#{project.id}" %>>
+      <div class="project-selection-individual__name"><%= project.name %></div>
+      <div class="project-selection-individual__stars"></div>
+      <div class="project-selection-individual__description"><%= project.description %></div>
+    </a>
+  <% end %>
+  </div>
+  </div>
+</div>
+<% end %>
