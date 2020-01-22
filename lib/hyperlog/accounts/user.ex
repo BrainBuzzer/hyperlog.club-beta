@@ -25,7 +25,7 @@ defmodule Hyperlog.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:name, :email, :username, :avatar, :discord_connected, :xp, :house, :onboard_complete])
-    |> validate_required([:name, :email, :username, :avatar, :discord_connected, :xp, :house, :onboard_complete])
+    |> validate_required([:name, :email, :username, :discord_connected, :xp, :house, :onboard_complete])
     |> unique_constraint(:email)
     |> unique_constraint(:username)
     |> foreign_key_constraint(:roles_id)
