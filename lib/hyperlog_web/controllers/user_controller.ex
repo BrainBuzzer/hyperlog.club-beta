@@ -4,32 +4,21 @@ defmodule HyperlogWeb.UserController do
   alias Hyperlog.Accounts
 
   def home(conn, _params) do
-    if conn.assigns.current_user do
-      if conn.assigns.current_user.onboard_complete do
-        render(conn, "home.html", current_user: conn.assigns.current_user)
-      else
-        redirect(conn, to: "/onboard")
-      end
-    else
-      conn
-      |> redirect(to: "/")
-    end
+    render(conn, "home.html", current_user: Pow.Plug.current_user(conn))
   end
 
   def connect_discord(conn, _params) do
-    if conn.assigns.current_user.discord_connected do
-      redirect(conn, to: "/home")
+    current_user = Pow.Plug.current_user(conn)
+    IO.inspect current_user
+    if current_user.discord_connected and current_user.github_connected do
+     redirect(conn, to: "/onboard")
     else
       render(conn, "discord_conn.html")
     end
   end
 
   def user_onboard(conn, _params) do
-    if conn.assigns.current_user.onboard_complete do
-      redirect(conn, to: "/home")
-    else
-      render(conn, "onboard.html")
-    end
+    render(conn, "onboard.html")
   end
 
   def assign_role(conn, %{"roles" => %{"experience_role" => role1, "position_role" => role2}}) do
@@ -48,22 +37,15 @@ defmodule HyperlogWeb.UserController do
   end
 
   def profile_page(conn, _params) do
-    if conn.assigns.current_user do
-      render(conn, "profile.html", user: conn.assigns.current_user)
-    else
-      redirect(conn, to: "/login")
-    end
+    IO.inspect conn
+    render(conn, "profile.html", current_user: Pow.Plug.current_user(conn))
   end
 
   def delete_user_profile(conn, _params) do
-    if conn.assigns.current_user do
-      Accounts.delete_user(conn.assigns.current_user.id)
-      conn
-      |> put_flash(:info, "Account deleted successfully")
-      |> redirect(to: "/")
-    else
-      redirect(conn, to: "/")
-    end
+    Accounts.delete_user(conn.assigns.current_user.id)
+    conn
+    |> put_flash(:info, "Account deleted successfully")
+    |> redirect(to: "/")
   end
 
   def user_overview_page(conn, %{"username" => username}) do

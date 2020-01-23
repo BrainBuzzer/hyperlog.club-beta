@@ -136,4 +136,65 @@ defmodule Hyperlog.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_discord(discord)
     end
   end
+
+  describe "github" do
+    alias Hyperlog.Accounts.Github
+
+    @valid_attrs %{access_token: "some access_token", refresh_token: "some refresh_token"}
+    @update_attrs %{access_token: "some updated access_token", refresh_token: "some updated refresh_token"}
+    @invalid_attrs %{access_token: nil, refresh_token: nil}
+
+    def github_fixture(attrs \\ %{}) do
+      {:ok, github} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_github()
+
+      github
+    end
+
+    test "list_github/0 returns all github" do
+      github = github_fixture()
+      assert Accounts.list_github() == [github]
+    end
+
+    test "get_github!/1 returns the github with given id" do
+      github = github_fixture()
+      assert Accounts.get_github!(github.id) == github
+    end
+
+    test "create_github/1 with valid data creates a github" do
+      assert {:ok, %Github{} = github} = Accounts.create_github(@valid_attrs)
+      assert github.access_token == "some access_token"
+      assert github.refresh_token == "some refresh_token"
+    end
+
+    test "create_github/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_github(@invalid_attrs)
+    end
+
+    test "update_github/2 with valid data updates the github" do
+      github = github_fixture()
+      assert {:ok, %Github{} = github} = Accounts.update_github(github, @update_attrs)
+      assert github.access_token == "some updated access_token"
+      assert github.refresh_token == "some updated refresh_token"
+    end
+
+    test "update_github/2 with invalid data returns error changeset" do
+      github = github_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_github(github, @invalid_attrs)
+      assert github == Accounts.get_github!(github.id)
+    end
+
+    test "delete_github/1 deletes the github" do
+      github = github_fixture()
+      assert {:ok, %Github{}} = Accounts.delete_github(github)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_github!(github.id) end
+    end
+
+    test "change_github/1 returns a github changeset" do
+      github = github_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_github(github)
+    end
+  end
 end

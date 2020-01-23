@@ -31,7 +31,7 @@ config :phoenix, :json_library, Jason
 
 config :ueberauth, Ueberauth,
   providers: [
-    github: {Ueberauth.Strategy.Github, [default_scope: "user:email"]},
+    github: {Ueberauth.Strategy.Github, [default_scope: "read:user,user:email,public_repo"]},
     discord: {Ueberauth.Strategy.Discord, [default_scope: "identify email guilds guilds.join messages.read"]}
   ]
 

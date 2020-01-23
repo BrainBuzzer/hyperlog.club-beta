@@ -17,7 +17,7 @@
             <li><a href="<%= "/u/#{@conn.assigns.current_user.username}" %>">Profile</li>
             <li><a href="/courses">Courses</a></li>
             <li>
-              <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
+              <%= form_for @conn, Routes.pow_session_path(@conn, :delete), fn _f -> %>
                 <%= submit "Logout", class: "logout-button" %>
               <% end %>
             </li>
