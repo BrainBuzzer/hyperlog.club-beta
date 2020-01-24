@@ -17,9 +17,7 @@
             <li><a href="<%= "/u/#{@conn.assigns.current_user.username}" %>">Profile</li>
             <li><a href="/courses">Courses</a></li>
             <li>
-              <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
-                <%= submit "Logout", class: "logout-button" %>
-              <% end %>
+              <%= link "Logout", to: Routes.pow_session_path(@conn, :delete), class: "logout-link", method: :delete %>
             </li>
           </ul>
         </nav>
@@ -30,7 +28,7 @@
             <li><a href="#">About</a></li>
           </ul>
         </nav>
-        <a class="cta" href="/auth/github"><button class="github-button"><i class="fab fa-github-square fa-lg"></i> Sign in with Github</button></a>
+        <a class="cta" href="<%= Routes.pow_registration_path(@conn, :new) %>"><button class="github-button"><i class="fa fa-user-plus fa-lg"></i> Register now</button></a>
       <% end %>
     </header>
     <main role="main" class="container">

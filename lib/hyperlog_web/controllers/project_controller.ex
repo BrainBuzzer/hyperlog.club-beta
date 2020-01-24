@@ -5,15 +5,11 @@ defmodule HyperlogWeb.ProjectController do
   alias Hyperlog.Accounts
 
   def user_projects(conn, _params) do
-    if conn.assigns.current_user do
-      projects = Project.get_projects_by_user_id(conn.assigns.current_user.id)
-      conn
-      |> assign(:projects, projects)
-      |> assign(:current_user, conn.assigns.current_user)
-      |> render("projects.html")
-    else
-      redirect(conn, to: "/")
-    end
+    projects = Project.get_projects_by_user_id(conn.assigns.current_user.id)
+    conn
+    |> assign(:projects, projects)
+    |> assign(:current_user, conn.assigns.current_user)
+    |> render("projects.html")
   end
 
   def user_project_new(conn, _params) do

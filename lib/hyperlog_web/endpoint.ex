@@ -42,5 +42,7 @@ defmodule HyperlogWeb.Endpoint do
     key: "_hyperlog_key",
     signing_salt: "ABcekXti"
 
+  plug Pow.Plug.Session, otp_app: :hyperlog
+
   plug HyperlogWeb.Router
 end

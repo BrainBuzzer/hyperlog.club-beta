@@ -3,13 +3,12 @@ defmodule Hyperlog.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
+      add :email, :string, null: false
+      add :password_hash, :string
       add :name, :string
-      add :email, :string
       add :username, :string
-      add :avatar, :string
+      add :github_connected, :boolean, default: false, null: false
       add :discord_connected, :boolean, default: false, null: false
-      add :xp, :integer, default: 0
-      add :house, :string, default: "None"
 
       timestamps()
     end

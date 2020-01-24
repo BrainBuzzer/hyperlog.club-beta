@@ -36,7 +36,7 @@ defmodule Hyperlog.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:discord, :roles])
+  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:discord, :github, :projects, :roles])
 
   def get_user_by_username(username), do: Repo.get_by(User, username: username) |> Repo.preload([:projects, :roles])
 
@@ -104,19 +104,6 @@ defmodule Hyperlog.Accounts do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
-  end
-
-  def get_or_create_user(user = %{email: email}) do
-    case Repo.get_by(User, %{email: email}) do
-      user = %User{} -> {:ok, user}
-      nil -> create_user_procedure(user)
-    end
-  end
-
-  defp create_user_procedure(user) do
-    {:ok, user} = create_user(user)
-    HyperlogWeb.Email.welcome_email(user.email) |> HyperlogWeb.Mailer.deliver_now()
-    {:ok, user}
   end
 
   def get_user_by_email(%{email: email}) do
@@ -223,7 +210,7 @@ defmodule Hyperlog.Accounts do
   end
 
   def connect_discord(%User{} = user, auth) do
-    update_user(user, %{discord_connected: true})
+    user = update_user(user, %{discord_connected: true})
     changeset = Ecto.build_assoc(user, :discord, %Discord{
       access_token: auth.credentials.token,
       refresh_token: auth.credentials.refresh_token,
@@ -231,6 +218,7 @@ defmodule Hyperlog.Accounts do
       discord_uid: auth.uid
     })
     Repo.insert! changeset
+    {:ok, user}
   end
 
   def get_role!(id), do: Repo.get(Role, id)
@@ -266,5 +254,110 @@ defmodule Hyperlog.Accounts do
     |> Ecto.Changeset.change
     |> Ecto.Changeset.put_assoc(:roles, roles)
     |> Repo.update
+  end
+
+  alias Hyperlog.Accounts.Github
+
+  @doc """
+  Returns the list of github.
+
+  ## Examples
+
+      iex> list_github()
+      [%Github{}, ...]
+
+  """
+  def list_github do
+    Repo.all(Github)
+  end
+
+  @doc """
+  Gets a single github.
+
+  Raises `Ecto.NoResultsError` if the Github does not exist.
+
+  ## Examples
+
+      iex> get_github!(123)
+      %Github{}
+
+      iex> get_github!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_github!(id), do: Repo.get!(Github, id)
+
+  @doc """
+  Creates a github.
+
+  ## Examples
+
+      iex> create_github(%{field: value})
+      {:ok, %Github{}}
+
+      iex> create_github(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_github(attrs \\ %{}) do
+    %Github{}
+    |> Github.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a github.
+
+  ## Examples
+
+      iex> update_github(github, %{field: new_value})
+      {:ok, %Github{}}
+
+      iex> update_github(github, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_github(%Github{} = github, attrs) do
+    github
+    |> Github.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Github.
+
+  ## Examples
+
+      iex> delete_github(github)
+      {:ok, %Github{}}
+
+      iex> delete_github(github)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_github(%Github{} = github) do
+    Repo.delete(github)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking github changes.
+
+  ## Examples
+
+      iex> change_github(github)
+      %Ecto.Changeset{source: %Github{}}
+
+  """
+  def change_github(%Github{} = github) do
+    Github.changeset(github, %{})
+  end
+
+  def link_user_with_github(user, token) do
+    {:ok, user} = update_user(user, %{github_connected: true})
+    changeset = Ecto.build_assoc(user, :github, %Github{
+      access_token: token
+    })
+    Repo.insert! changeset
+    {:ok, user}
   end
 end

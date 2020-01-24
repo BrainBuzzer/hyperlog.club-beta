@@ -31,7 +31,7 @@ config :phoenix, :json_library, Jason
 
 config :ueberauth, Ueberauth,
   providers: [
-    github: {Ueberauth.Strategy.Github, [default_scope: "user:email"]},
+    github: {Ueberauth.Strategy.Github, [default_scope: "read:user,user:email,public_repo"]},
     discord: {Ueberauth.Strategy.Discord, [default_scope: "identify email guilds guilds.join messages.read"]}
   ]
 
@@ -44,6 +44,10 @@ config :ueberauth, Ueberauth.Strategy.Discord.OAuth,
   client_secret: System.get_env("DISCORD_CLIENT_SECRET"),
   redirect_uri: "http://localhost:4000/auth/discord/callback"
 
+config :hyperlog, :pow,
+  user: Hyperlog.Accounts.User,
+  repo: Hyperlog.Repo,
+  web_module: HyperlogWeb
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

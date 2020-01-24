@@ -4,6 +4,15 @@
     Just one more step. Connect your account to Discord so we join you to the community.
   </div>
   <div class="hero-cta">
-    <a href="/auth/discord"><button class="discord-button"><i class="fab fa-discord fa-lg"></i> Connect to Discord</button></a>
+    <%= if @current_user.github_connected do %>
+      Github Already Connected
+    <% else %>
+      <a href="/auth/github"><button class="github-button"><i class="fab fa-github fa-lg"></i> Connect to Github</button></a>
+    <% end %>
+    <%= if @current_user.discord_connected do %>
+      Discord Already Connected
+    <% else %>
+      <a href="/auth/discord"><button class="discord-button"><i class="fab fa-discord fa-lg"></i> Connect to Discord</button></a>
+    <% end %>
   </div>
 </section>
