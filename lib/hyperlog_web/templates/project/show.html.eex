@@ -1,7 +1,8 @@
-<%= @project.name %>
+<div class="text-white"><%= @project.name %>
 <%= @project.description %>
 <a href="<%= @project.link %>">Explore Project</a>
 
 <br/>
 
 <div class="warning-msg">This is a work in progress. We'll soon be adding the complete statistics for the project.</div>
+</div>
