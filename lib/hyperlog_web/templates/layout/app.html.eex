@@ -33,12 +33,12 @@
     </header>
     <main role="main" class="container">
       <%= if get_flash(@conn, :info) do %>
-        <div class="flash flash-banner">
+        <div class="flash">
           <%= get_flash(@conn, :info) %>
         </div>
       <% end %>
       <%= if get_flash(@conn, :error) do %>
-        <div class="flash flash-error flash-banner">
+        <div class="flash flash-error">
           <%= get_flash(@conn, :error) %>
         </div>
       <% end %>

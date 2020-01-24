@@ -6,7 +6,7 @@
   <div class="Box-body">
   <%= form_for @changeset, @action, [as: :user, class: "pb-2"], fn f -> %>
     <%= if @changeset.action do %>
-      <div class="flash flash-banner flash-error">
+      <div class="flash flash-error">
         <p>Oops, something went wrong! Please check the errors below.</p>
       </div>
     <% end %>
