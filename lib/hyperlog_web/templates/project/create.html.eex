@@ -1,7 +1,7 @@
 <div class="projects-form">
   <%= form_for @changeset, Routes.project_path(@conn, :user_create_new_project_post), fn f -> %>
     <%= if @changeset.action do %>
-      <div class="error-msg">
+      <div class="flash flash-error">
         <p>Oops, something went wrong! Please check the errors below.</p>
       </div>
     <% end %>

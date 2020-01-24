@@ -33,10 +33,14 @@
     </header>
     <main role="main" class="container">
       <%= if get_flash(@conn, :info) do %>
-        <p class="info-msg" role="alert"><%= get_flash(@conn, :info) %></p>
+        <div class="flash flash-banner">
+          <%= get_flash(@conn, :info) %>
+        </div>
       <% end %>
       <%= if get_flash(@conn, :error) do %>
-        <p class="error-msg" role="alert"><%= get_flash(@conn, :error) %></p>
+        <div class="flash flash-error flash-banner">
+          <%= get_flash(@conn, :error) %>
+        </div>
       <% end %>
       <%= render @view_module, @view_template, assigns %>
     </main>
