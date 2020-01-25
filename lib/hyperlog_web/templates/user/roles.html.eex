@@ -2,9 +2,12 @@
   <%= render(HyperlogWeb.UserView, "_profile_sidebar.html", page: "roles") %>
   <div class="col-8 col-lg-8 col-md-8 col-sm-12 float-left p-responsive">
     <!-- Profile Page -->
-    <h1 class="h1">Profile Page</h1>
+    <div class="Subhead">
+      <div class="Subhead-heading">Roles</div>
+      <div class="Subhead-description">Allow us to tailor your experience. Choose what role you want on Discord now!</div>
+    </div>
     <!-- Email -->
-    <div class="Box">
+    <div class="p-2">
       <%= form_for :roles, Routes.user_path(@conn, :assign_role), fn f -> %>
         <div class="form-group">
           <%= label(f, :experience_role, "How experienced are you in programming?") %>

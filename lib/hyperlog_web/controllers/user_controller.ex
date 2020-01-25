@@ -14,8 +14,9 @@ defmodule HyperlogWeb.UserController do
 
   def assign_role(conn, %{"roles" => %{"experience_role" => role1, "position_role" => role2, "language_role" => role_array}}) do
     received_roles = [role1, role2] ++ role_array
-    with {:ok, _user} <- add_role(conn.assigns.current_user, received_roles) do
+    with {:ok, user} <- add_role(Pow.Plug.current_user(conn), received_roles) do
       conn
+      |> sync_user(user)
       |> put_flash(:info, "Roles Assigned!")
       |> render("home.html")
     end
