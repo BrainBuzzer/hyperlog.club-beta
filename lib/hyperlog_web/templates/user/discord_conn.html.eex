@@ -5,12 +5,12 @@
   </div>
   <div class="hero-cta">
     <%= if @current_user.github_connected do %>
-      Github Already Connected
+      <button class="btn btn-large mr-2" type="button" aria-disabled="true"><i class="fab fa-github fa-lg"></i> Github Already Connected</button>
     <% else %>
-      <a href="/auth/github"><button class="github-button"><i class="fab fa-github fa-lg"></i> Connect to Github</button></a>
+      <a href="/auth/github"><button class="btn btn-large"><i class="fab fa-github fa-lg"></i> Connect to Github</button></a>
     <% end %>
     <%= if @current_user.discord_connected do %>
-      Discord Already Connected
+      <button class="btn" aria-disabled="true"><i class="fab fa-discord fa-lg"></i> Discord Already Connected</button>
     <% else %>
       <a href="/auth/discord"><button class="discord-button"><i class="fab fa-discord fa-lg"></i> Connect to Discord</button></a>
     <% end %>

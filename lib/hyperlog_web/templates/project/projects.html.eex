@@ -1,7 +1,11 @@
-<%= if @projects != nil do %>
-  Projects Exist for this user!
+<%= if length(@projects) > 0 do %>
+Projects
 <% else %>
-  There are no projects for this user. Please create a project.
-
-  <a href="/projects/create">Create a project</a>
+<div class="blankslate">
+  <img src="https://ghicons.github.com/assets/images/light/Pull%20Request.png" alt="" class="mb-3" />
+  <h3 class="mb-1 text-white">You don’t seem to have any projects.</h3>
+  <p class="text-white">Projects help you showcase your best work on your profile and give a complete analysis of it to other people.</p>
+  <a href="/projects/create" class="btn btn-primary my-3">New Project</a>
+  <p><button class="btn-link" type="button">Learn more</button></p>
+</div>
 <% end %>
