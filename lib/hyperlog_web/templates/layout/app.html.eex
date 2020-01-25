@@ -10,8 +10,8 @@
   </head>
   <body>
     <header>
-      <a href="/" class="logo"><img class="logo" src="<%= Routes.static_path(@conn, "/images/hyperlog.png") %>" alt="Logo"/></a>
       <%= if @current_user do %>
+        <a href="/home" class="logo"><img class="logo" src="<%= Routes.static_path(@conn, "/images/hyperlog.png") %>" alt="Logo"/></a>
         <nav>
           <ul class="nav__links">
             <li><a href="<%= "/u/#{@current_user.username}" %>">Profile</li>
@@ -22,6 +22,7 @@
           </ul>
         </nav>
       <% else %>
+        <a href="/" class="logo"><img class="logo" src="<%= Routes.static_path(@conn, "/images/hyperlog.png") %>" alt="Logo"/></a>
         <nav>
           <ul class="nav__links">
             <li><a href="#">How?</a></li>
