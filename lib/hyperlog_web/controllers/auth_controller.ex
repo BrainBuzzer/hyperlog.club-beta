@@ -33,7 +33,7 @@ defmodule HyperlogWeb.AuthController do
   defp sign_in_user(user, conn) do
     conn
     |> sync_user(user)
-    |> put_flash(:info, "Successfully Connected.")
+    |> put_flash(:info, "Github Connected Successfully.")
     |> redirect(to: "/home")
   end
 
@@ -43,7 +43,7 @@ defmodule HyperlogWeb.AuthController do
     conn
     |> sync_user(user)
     |> put_flash(:info, "Discord connected successfully")
-    |> redirect(to: "/onboard")
+    |> redirect(to: "/home")
   end
 
 end

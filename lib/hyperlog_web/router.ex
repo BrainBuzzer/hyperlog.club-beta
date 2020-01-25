@@ -43,8 +43,6 @@ defmodule HyperlogWeb.Router do
 
     get "/profile", UserController, :profile_page
     get "/home", UserController, :home
-    get "/connect_discord", UserController, :connect_discord
-    get "/onboard", UserController, :user_onboard
 
     get "/projects", ProjectController, :user_projects
     get "/projects/create", ProjectController, :user_project_new
