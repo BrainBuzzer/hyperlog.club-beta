@@ -14,9 +14,9 @@
       Account
     </a>
     <%= if @page == "profile" do %>
-      <a class="menu-item" href="#url" aria-current="page">
+      <a class="menu-item" href="/profile" aria-current="page">
     <% else %>
-      <a class="menu-item" href="#url">
+      <a class="menu-item" href="/profile">
     <% end %>
       <svg width="12" height="16" viewBox="0 0 12 16" class="octicon octicon-person" aria-hidden="true">
         <path
@@ -27,9 +27,9 @@
       Profile
     </a>
     <%= if @page == "roles" do %>
-      <a class="menu-item" href="#url" aria-current="page">
+      <a class="menu-item" href="/profile/roles" aria-current="page">
     <% else %>
-      <a class="menu-item" href="#url">
+      <a class="menu-item" href="/profile/roles">
     <% end %>
       <svg
         version="1.1"

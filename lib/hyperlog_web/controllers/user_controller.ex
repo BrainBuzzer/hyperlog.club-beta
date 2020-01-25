@@ -4,11 +4,16 @@ defmodule HyperlogWeb.UserController do
   alias Hyperlog.Accounts
 
   def home(conn, _params) do
-    render(conn, "home.html", current_user: Pow.Plug.current_user(conn))
+    render(conn, "home.html")
   end
 
-  def assign_role(conn, %{"roles" => %{"experience_role" => role1, "position_role" => role2}}) do
-    received_roles = [role1, role2]
+  def roles_page(conn, _params) do
+    roles = Accounts.list_roles
+    render(conn, "roles.html", roles: roles)
+  end
+
+  def assign_role(conn, %{"roles" => %{"experience_role" => role1, "position_role" => role2, "language_role" => role_array}}) do
+    received_roles = [role1, role2] ++ role_array
     with {:ok, _user} <- add_role(conn.assigns.current_user, received_roles) do
       conn
       |> put_flash(:info, "Roles Assigned!")

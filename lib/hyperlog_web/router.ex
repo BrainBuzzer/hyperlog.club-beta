@@ -41,6 +41,7 @@ defmodule HyperlogWeb.Router do
     get "/auth/:provider/callback", AuthController, :callback
 
     get "/profile", UserController, :profile_page
+    get "/profile/roles", UserController, :roles_page
     get "/home", UserController, :home
 
     get "/projects", ProjectController, :user_projects

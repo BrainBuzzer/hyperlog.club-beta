@@ -1,4 +1,43 @@
-<%= form_for :roles, Routes.user_path(@conn, :assign_role), fn f -> %>
-  <%= multiple_select(f, :roles, Enum.map(@roles, &{&1.name, &1.discord_id}))%>
-  <%= submit "Submit" %>
-<% end %>
+<div class="container-lg clearfix mt-5">
+  <%= render(HyperlogWeb.UserView, "_profile_sidebar.html", page: "roles") %>
+  <div class="col-8 col-lg-8 col-md-8 col-sm-12 float-left p-responsive">
+    <!-- Profile Page -->
+    <h1 class="h1">Profile Page</h1>
+    <!-- Email -->
+    <div class="Box">
+      <%= form_for :roles, Routes.user_path(@conn, :assign_role), fn f -> %>
+        <div class="form-group">
+          <%= label(f, :experience_role, "How experienced are you in programming?") %>
+          <%= select(f, :experience_role, Enum.flat_map(@roles, fn role ->
+            case String.equivalent?(role.type, "experience") do
+              true -> [{role.name, role.discord_id}]
+              false -> []
+            end
+          end), class: "form-select input-block") %>
+        </div>
+        <div class="form-group">
+          <%= label(f, :position_role, "What describes you the best?") %>
+          <%= select(f, :position_role, Enum.flat_map(@roles, fn role ->
+            case String.equivalent?(role.type, "position") do
+              true -> [{role.name, role.discord_id}]
+              false -> []
+            end
+          end), class: "form-select input-block") %>
+        </div>
+        <div class="form-group">
+          <%= label(f, :language_role, "How experienced are you in programming?") %>
+          <%= multiple_select(f, :language_role, Enum.flat_map(@roles, fn role ->
+            case String.equivalent?(role.type, "language") do
+              true -> [{role.name, role.discord_id}]
+              false -> []
+            end
+          end), class: "form-select input-block") %>
+        </div>
+        <div class="form-actions float-left">
+          <%= submit "Submit", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
