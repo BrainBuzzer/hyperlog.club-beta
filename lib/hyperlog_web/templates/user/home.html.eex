@@ -44,7 +44,7 @@
 
   <!-- Github and Discord connection -->
   <div class="col-lg-4 col-md-12 col-sm-12 float-left p-responsive mx-auto">
-    <div class="Box">
+    <div class="Box box-shadow">
       <div class="Box-row d-flex flex-justify-center">
         <%= if @current_user.github_connected do %>
           <button class="btn btn-large btn-block" type="button" aria-disabled="true"><i class="fab fa-github fa-lg"></i> Github Connected 🎉</button>

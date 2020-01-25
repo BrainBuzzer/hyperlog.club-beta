@@ -1,5 +1,25 @@
 <%= if length(@projects) > 0 do %>
-Projects
+<div class="container-lg mt-5">
+  <div class="Subhead">
+    <div class="Subhead-heading">Projects</div>
+    <div class="Subhead-actions">
+      <a class="btn btn-sm btn-secondary" href="/projects/create">Add New Project</a>
+    </div>
+  </div>
+  <div class="Box">
+    <%= for project <- @projects do %>
+    <div class="Box-row d-flex flex-items-center">
+      <div class="flex-auto">
+        <strong><%= project.name %></strong>
+        <div class="text-small text-gray-light">
+          <%= project.description %>
+        </div>
+      </div>
+      <a href="<%= "/project/#{project.id}" %>" class="btn btn-primary" name="button">View</a>
+    </div>
+    <% end %>
+  </div>
+</div>
 <% else %>
 <div class="blankslate">
   <img src="https://ghicons.github.com/assets/images/light/Pull%20Request.png" alt="" class="mb-3" />

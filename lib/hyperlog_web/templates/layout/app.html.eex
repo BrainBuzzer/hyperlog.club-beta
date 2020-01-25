@@ -14,8 +14,7 @@
         <a href="/home" class="logo"><img class="logo" src="<%= Routes.static_path(@conn, "/images/hyperlog.png") %>" alt="Logo"/></a>
         <nav>
           <ul class="nav__links">
-            <li><a href="<%= "/u/#{@current_user.username}" %>">Profile</li>
-            <li><a href="/courses">Courses</a></li>
+            <li><a href="/profile">Profile</li>
             <li>
               <%= link "Logout", to: Routes.pow_session_path(@conn, :delete), class: "logout-link", method: :delete %>
             </li>
