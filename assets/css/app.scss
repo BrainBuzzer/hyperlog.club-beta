@@ -56,39 +56,3 @@
 .gap {
   margin-right: 20px;
 }
-
-a {
-  color: #3498db;
-  transition: all 0.3s ease;
-}
-
-a:hover {
-  color: #2980b9;
-}
-
-table {
-  border-spacing: 0;
-  width: 100%;
-}
-
-th {
-  font-weight: 600;
-  font-size: 1.2rem;
-}
-
-td,
-th {
-  border-bottom: 0.1rem solid #e1e1e1;
-  padding: 1.2rem 1.5rem;
-  text-align: left;
-}
-
-td:first-child,
-th:first-child {
-  padding-left: 0;
-}
-
-td:last-child,
-th:last-child {
-  padding-right: 0;
-}
