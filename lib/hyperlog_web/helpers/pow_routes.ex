@@ -7,4 +7,7 @@ defmodule HyperlogWeb.Pow.Routes do
 
   @impl true
   def after_sign_in_path(conn), do: Routes.user_path(conn, :home)
+
+  @impl true
+  def user_already_authenticated_path(conn), do: Routes.user_path(conn, :home)
 end
