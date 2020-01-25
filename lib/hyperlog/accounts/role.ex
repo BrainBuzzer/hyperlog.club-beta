@@ -5,6 +5,7 @@ defmodule Hyperlog.Accounts.Role do
   schema "roles" do
     field :discord_id, :string
     field :name, :string
+    field :type, :string
 
     many_to_many :users, Hyperlog.Accounts.User, join_through: "users_roles", on_replace: :delete
 
@@ -14,7 +15,7 @@ defmodule Hyperlog.Accounts.Role do
   @doc false
   def changeset(role, attrs) do
     role
-    |> cast(attrs, [:name, :discord_id])
-    |> validate_required([:name, :discord_id])
+    |> cast(attrs, [:name, :discord_id, :type])
+    |> validate_required([:name, :discord_id, :type])
   end
 end

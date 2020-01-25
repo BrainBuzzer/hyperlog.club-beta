@@ -14,12 +14,17 @@ alias Hyperlog.Courses
 alias Hyperlog.Accounts
 
 roles = [
-  %{name: "Beginner Role", discord_id: "653880931320463361"},
-  %{name: "Intermediate Role", discord_id: "653881077118533633"},
-  %{name: "Advanced Role", discord_id: "655131756277530634"},
-  %{name: "Student", discord_id: "655131817921478676"},
-  %{name: "Teacher", discord_id: "655131795444072457"},
-  %{name: "Professional", discord_id: "655131836804104202"},
+  %{name: "Beginner Role", discord_id: "653880931320463361", type: "experience"},
+  %{name: "Intermediate Role", discord_id: "653881077118533633", type: "experience"},
+  %{name: "Advanced Role", discord_id: "655131756277530634", type: "experience"},
+  %{name: "Student", discord_id: "655131817921478676", type: "position"},
+  %{name: "Teacher", discord_id: "655131795444072457", type: "position"},
+  %{name: "Professional", discord_id: "655131836804104202", type: "position"},
+  %{name: "C", discord_id: "111", type: "language"},
+  %{name: "Elixir", discord_id: "123", type: "language"},
+  %{name: "Rust", discord_id: "2135", type: "language"},
+  %{name: "Python", discord_id: "123561", type: "language"},
+  %{name: "JavaScript", discord_id: "1231", type: "language"}
 ]
 
 for role <- roles do

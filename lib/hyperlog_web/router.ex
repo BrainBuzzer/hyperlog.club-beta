@@ -30,7 +30,6 @@ defmodule HyperlogWeb.Router do
 
     get "/", PageController, :index
 
-    get "/courses", CourseController, :index
     get "/courses/javascript/:chapter_slug/:lesson_slug", CourseController, :javascript_course_start
 
     get "/u/:username", UserController, :user_overview_page
@@ -42,9 +41,8 @@ defmodule HyperlogWeb.Router do
     get "/auth/:provider/callback", AuthController, :callback
 
     get "/profile", UserController, :profile_page
+    get "/profile/roles", UserController, :roles_page
     get "/home", UserController, :home
-    get "/connect_discord", UserController, :connect_discord
-    get "/onboard", UserController, :user_onboard
 
     get "/projects", ProjectController, :user_projects
     get "/projects/create", ProjectController, :user_project_new

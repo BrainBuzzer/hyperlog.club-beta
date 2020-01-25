@@ -1,4 +1,4 @@
-Create a new Project
+<div class="text-white text-center h3">Create a new Project</div>
 
 <div class="list-select-projects">
   <%= for repo <- @repos do %>

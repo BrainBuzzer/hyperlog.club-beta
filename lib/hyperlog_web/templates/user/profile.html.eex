@@ -1,13 +1,47 @@
-<div class="box profile-page-box">
-<!-- Profile Page -->
-<h1>Profile Page</h1>
-<!-- Email -->
-<p>Email : <%= @current_user.email %></p>
-<!-- Name of the User -->
-<p>Name : <%= @current_user.name %></p>
-<!-- Discord Roles Switching -->
-<!-- Delete Account Option-->
-<%= form_for :delete_user, Routes.user_path(@conn, :delete_user_profile), fn f -> %>
-<%= submit "Delete User Account", class: "btn-danger" %>
-<%= end %>
+<div class="container-lg clearfix mt-5">
+  <%= render(HyperlogWeb.UserView, "_profile_sidebar.html", page: "profile") %>
+  <div class="col-8 col-lg-8 col-md-8 col-sm-12 float-left p-responsive">
+    <!-- Profile Page -->
+    <h1 class="h1">Profile Page</h1>
+    <!-- Email -->
+    <p>Email : <%= @current_user.email %></p>
+    <!-- Name of the User -->
+    <p>Name : <%= @current_user.name %></p>
+    <div class="Subhead">
+      <div class="Subhead-heading">Connection with other apps</div>
+    </div>
+    <div class="Box box-shadow">
+      <div class="Box-row d-flex flex-justify-center">
+        <%= if @current_user.github_connected do %>
+          <button class="btn btn-large btn-block" type="button" aria-disabled="true"><i class="fab fa-github fa-lg"></i> Github Connected 🎉</button>
+        <% else %>
+          <a href="/auth/github"><button class="btn btn-large btn-block"><i class="fab fa-github fa-lg"></i> Connect to Github</button></a>
+        <% end %>
+      </div>
+      <div class="Box-row d-flex flex-justify-center">
+        <%= if @current_user.discord_connected do %>
+          <button class="btn btn-large btn-block bg-purple text-white" aria-disabled="true"><i class="fab fa-discord fa-lg"></i> Discord Connected 🎉</button>
+        <% else %>
+          <a href="/auth/discord"><button class="btn btn-large btn-block bg-purple text-white"><i class="fab fa-discord fa-lg"></i> Connect to Discord</button></a>
+        <% end %>
+      </div>
+    </div>
+    <!-- Delete Account Option-->
+    <div class="Subhead mt-3">
+      <div class="Subhead-heading Subhead-heading--danger">Danger zone</div>
+    </div>
+    <div class="Box Box--danger p-3">
+      <div class="d-flex flex-items-center">
+        <div class="flex-auto">
+          <strong class="text-red">Delete Account</strong>
+          <div class="text-small text-gray-light">
+            This will delete your account with Hyperlog and all the details associated with it. Proceed with caution.
+          </div>
+        </div>
+        <%= form_for :delete_user, Routes.user_path(@conn, :delete_user_profile), fn f -> %>
+          <%= submit "Delete User Account", class: "btn btn-danger" %>
+        <%= end %>
+      </div>
+    </div>
+  </div>
 </div>

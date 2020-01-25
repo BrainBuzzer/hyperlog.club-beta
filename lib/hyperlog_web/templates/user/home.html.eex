@@ -1,13 +1,64 @@
-<section class="hero">
-  <img src="<%= Routes.static_path(@conn, "/images/welcome.svg") %>" class="hero-img" alt="Welcome">
-  <div class="hero-main-headline">
-    Thank you for joining the community!
+<div class="container-lg clearfix mt-5">
+  <!-- Main Content -->
+  <div class="col-lg-8 col-md-12 col-sm-12 float-left p-responsive">
+    <!-- Info Flash Section -->
+    <div class="flash mb-2">
+      <i class="fa fa-info-circle"></i>&nbsp;
+      VS Code extension is coming soon!
+    </div>
+    
+    <div class="flash mb-2">
+      <i class="fa fa-info-circle"></i>&nbsp;
+      New courses coming soon! Stay Tuned.
+    </div>
+
+    <div class="flash flash-success mb-2">
+      <a href="/projects" class="btn btn-primary btn-sm primary flash-action">Check out your Projects!</a>
+      <i class="fa fa-check-circle"></i>&nbsp;
+      Projects Support is out! 🥳
+    </div>
+
+    <!-- List courses -->
+    <section class="d-flex flex-column mt-5">
+      <div class="container-lg">
+        <div class="h1">Checkout the courses</div>
+        <div class="text-gray">We have curated some courses to make learning fun. These courses also increase your XPs if you are a beginner. So be sure to check them out!</div>
+      </div>
+      <div class="course-list mt-3">
+        <a class="course-list__item" href="/courses/javascript/intro/getting-started">
+          <div class="course-list__item__image">
+            <img src="<%= Routes.static_path(@conn, "/images/javascript-logo.svg") %>" alt="JavaScript Logo" />
+          </div>
+          <div class="course-list__item__info">
+            <div class="h2 text-gray-dark">
+              JavaScript Course
+            </div>
+            <div class="f4 text-gray">
+              Learn from the basics to complete advanced level and become a JavaScript Ninja.
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
   </div>
-  <div class="hero-para">
-    We are still in early stage. We will keep you updated with all the new stuff we add to the website so be sure to check you email periodically. Till then, why don’t you head over to Discord and introduce yourselves? Or maybe checkout some of our courses!
+
+  <!-- Github and Discord connection -->
+  <div class="col-lg-4 col-md-12 col-sm-12 float-left p-responsive mx-auto">
+    <div class="Box box-shadow">
+      <div class="Box-row d-flex flex-justify-center">
+        <%= if @current_user.github_connected do %>
+          <button class="btn btn-large btn-block" type="button" aria-disabled="true"><i class="fab fa-github fa-lg"></i> Github Connected 🎉</button>
+        <% else %>
+          <a href="/auth/github"><button class="btn btn-large btn-block"><i class="fab fa-github fa-lg"></i> Connect to Github</button></a>
+        <% end %>
+      </div>
+      <div class="Box-row d-flex flex-justify-center">
+        <%= if @current_user.discord_connected do %>
+          <button class="btn btn-large btn-block bg-purple text-white" aria-disabled="true"><i class="fab fa-discord fa-lg"></i> Discord Connected 🎉</button>
+        <% else %>
+          <a href="/auth/discord"><button class="btn btn-large btn-block bg-purple text-white"><i class="fab fa-discord fa-lg"></i> Connect to Discord</button></a>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class="hero-cta">
-    <a href="https://discordapp.com/app" class="gap"><button class="discord-button"><i class="fab fa-discord fa-lg"></i> Go to Discord</button></a>
-    <a href="/courses"><button class="primary-button">Check Courses</button></a>
-  </div>
-</section>
+</div>

@@ -210,7 +210,7 @@ defmodule Hyperlog.Accounts do
   end
 
   def connect_discord(%User{} = user, auth) do
-    user = update_user(user, %{discord_connected: true})
+    {:ok, user} = update_user(user, %{discord_connected: true})
     changeset = Ecto.build_assoc(user, :discord, %Discord{
       access_token: auth.credentials.token,
       refresh_token: auth.credentials.refresh_token,

@@ -10,18 +10,18 @@
   </head>
   <body>
     <header>
-      <a href="/" class="logo"><img class="logo" src="<%= Routes.static_path(@conn, "/images/hyperlog.png") %>" alt="Logo"/></a>
-      <%= if @conn.assigns.current_user do %>
+      <%= if @current_user do %>
+        <a href="/home" class="logo"><img class="logo" src="<%= Routes.static_path(@conn, "/images/hyperlog.png") %>" alt="Logo"/></a>
         <nav>
           <ul class="nav__links">
-            <li><a href="<%= "/u/#{@conn.assigns.current_user.username}" %>">Profile</li>
-            <li><a href="/courses">Courses</a></li>
+            <li><a href="/profile">Profile</li>
             <li>
               <%= link "Logout", to: Routes.pow_session_path(@conn, :delete), class: "logout-link", method: :delete %>
             </li>
           </ul>
         </nav>
       <% else %>
+        <a href="/" class="logo"><img class="logo" src="<%= Routes.static_path(@conn, "/images/hyperlog.png") %>" alt="Logo"/></a>
         <nav>
           <ul class="nav__links">
             <li><a href="#">How?</a></li>
@@ -33,10 +33,14 @@
     </header>
     <main role="main" class="container">
       <%= if get_flash(@conn, :info) do %>
-        <p class="info-msg" role="alert"><%= get_flash(@conn, :info) %></p>
+        <div class="flash">
+          <%= get_flash(@conn, :info) %>
+        </div>
       <% end %>
       <%= if get_flash(@conn, :error) do %>
-        <p class="error-msg" role="alert"><%= get_flash(@conn, :error) %></p>
+        <div class="flash flash-error">
+          <%= get_flash(@conn, :error) %>
+        </div>
       <% end %>
       <%= render @view_module, @view_template, assigns %>
     </main>

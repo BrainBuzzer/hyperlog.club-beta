@@ -10,8 +10,15 @@ defmodule HyperlogWeb.ErrorHelpers do
   """
   def error_tag(form, field) do
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
-      content_tag(:span, translate_error(error), class: "help-block")
+      content_tag(:span, translate_error(error), class: "error")
     end)
+  end
+
+  def error_class(form, field) do
+    class = "errored"
+    if Enum.any?(Keyword.get_values(form.errors, field)) do
+      class
+    end
   end
 
   @doc """
@@ -37,8 +44,10 @@ defmodule HyperlogWeb.ErrorHelpers do
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
       Gettext.dngettext(HyperlogWeb.Gettext, "errors", msg, msg, count, opts)
+      |> String.capitalize
     else
       Gettext.dgettext(HyperlogWeb.Gettext, "errors", msg, opts)
+      |> String.capitalize
     end
   end
 end

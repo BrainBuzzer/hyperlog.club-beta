@@ -1,13 +1,15 @@
 <section class="hero">
-  <img src="<%= Routes.static_path(@conn, "/images/home_page_illustration.svg") %>" class="hero-img" alt="Home Page illustration">
-  <div class="hero-main-headline">
-    Join the community for developers where learning programming is game!
-  </div>
-  <div class="hero-subhead color-gray">
-    Eat. Sleep. Code. Repeat.
-  </div>
-  <div class="hero-cta">
-    <a class="cta" href="<%= Routes.pow_registration_path(@conn, :new) %>"><button class="github-button"><i class="fa fa-user-plus fa-lg"></i> Register now</button></a>
-    <a class="cta" href="<%= Routes.pow_session_path(@conn, :new) %>"><button class="github-button"><i class="fa fa-user fa-lg"></i> Login</button></a>
+  <div class="container-lg d-flex flex-justify-center flex-column">
+    <img src="<%= Routes.static_path(@conn, "/images/home_page_illustration.svg") %>" class="hero-img" alt="Home Page illustration">
+    <div class="hero-main-headline text-white">
+      Join the community for developers where learning programming is game!
+    </div>
+    <div class="hero-subhead text-gray-light">
+      Eat. Sleep. Code. Repeat.
+    </div>
+    <div class="d-flex flex-justify-center">
+      <a class="cta mr-5" href="<%= Routes.pow_registration_path(@conn, :new) %>"><button class="btn-mktg btn-primary-mktg"><i class="fa fa-user-plus fa-lg"></i> Register now</button></a>
+      <a class="cta" href="<%= Routes.pow_session_path(@conn, :new) %>"><button class="btn-mktg"><i class="fa fa-user fa-lg"></i> Login</button></a>
+    </div>
   </div>
 </section>

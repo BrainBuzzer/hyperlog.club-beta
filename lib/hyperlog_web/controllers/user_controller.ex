@@ -4,27 +4,19 @@ defmodule HyperlogWeb.UserController do
   alias Hyperlog.Accounts
 
   def home(conn, _params) do
-    render(conn, "home.html", current_user: Pow.Plug.current_user(conn))
+    render(conn, "home.html")
   end
 
-  def connect_discord(conn, _params) do
-    current_user = Pow.Plug.current_user(conn)
-    IO.inspect current_user
-    if current_user.discord_connected and current_user.github_connected do
-     redirect(conn, to: "/onboard")
-    else
-      render(conn, "discord_conn.html")
-    end
+  def roles_page(conn, _params) do
+    roles = Accounts.list_roles
+    render(conn, "roles.html", roles: roles)
   end
 
-  def user_onboard(conn, _params) do
-    render(conn, "onboard.html")
-  end
-
-  def assign_role(conn, %{"roles" => %{"experience_role" => role1, "position_role" => role2}}) do
-    received_roles = [role1, role2]
-    with {:ok, _user} <- add_role(conn.assigns.current_user, received_roles) do
+  def assign_role(conn, %{"roles" => %{"experience_role" => role1, "position_role" => role2, "language_role" => role_array}}) do
+    received_roles = [role1, role2] ++ role_array
+    with {:ok, user} <- add_role(Pow.Plug.current_user(conn), received_roles) do
       conn
+      |> sync_user(user)
       |> put_flash(:info, "Roles Assigned!")
       |> render("home.html")
     end

@@ -47,7 +47,8 @@ config :ueberauth, Ueberauth.Strategy.Discord.OAuth,
 config :hyperlog, :pow,
   user: Hyperlog.Accounts.User,
   repo: Hyperlog.Repo,
-  web_module: HyperlogWeb
+  web_module: HyperlogWeb,
+  routes_backend: HyperlogWeb.Pow.Routes
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
