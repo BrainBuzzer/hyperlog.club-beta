@@ -51,7 +51,7 @@ defmodule HyperlogWeb.Router do
 
     get "/project/:project_id", ProjectController, :user_project_show
 
-    post "/roles", UserController, :assign_role
+    post "/profile/roles", UserController, :assign_role
     post "/profile/delete", UserController, :delete_user_profile
   end
 

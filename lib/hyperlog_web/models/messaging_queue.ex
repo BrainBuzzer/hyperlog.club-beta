@@ -16,6 +16,7 @@ defmodule HyperlogWeb.MessagingQueue do
 
     {:ok, send_data} = Poison.encode(%{user_id: user_id, roles: roles, action: action})
 
+    AMQP.Queue.declare(channel, "discord_roles")
     AMQP.Basic.publish(channel, "", "discord_roles", send_data, [content_type: "application/json"])
     AMQP.Connection.close(connection)
   end
