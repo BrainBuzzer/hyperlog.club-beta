@@ -42,7 +42,7 @@ config :ueberauth, Ueberauth.Strategy.Github.OAuth,
 config :ueberauth, Ueberauth.Strategy.Discord.OAuth,
   client_id: System.get_env("DISCORD_CLIENT_ID"),
   client_secret: System.get_env("DISCORD_CLIENT_SECRET"),
-  redirect_uri: "http://localhost:4000/auth/discord/callback"
+  redirect_uri: System.get_env("DISCORD_REDIRECT_URI")
 
 config :hyperlog, :pow,
   user: Hyperlog.Accounts.User,
