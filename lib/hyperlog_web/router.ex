@@ -55,6 +55,10 @@ defmodule HyperlogWeb.Router do
     post "/profile/delete", UserController, :delete_user_profile
   end
 
+  scope "/.well-known/acme-challenge", HyperlogWeb do
+    get "/:challenge", AcmeChallengeController, :show
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", HyperlogWeb do
   #   pipe_through :api

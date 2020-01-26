@@ -10,8 +10,17 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :hyperlog, HyperlogWeb.Endpoint,
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  url: [host: "beta.hyperlog.io", port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  https: [
+    port: 443,
+    otp_app: :hyperlog,
+    cipher_suite: :strong,
+    keyfile: System.get_env("SSL_KEY_FILE"),
+    certfile: System.get_env("SSL_CERT_FILE"),
+    cacertfile: System.get_env("SSL_CACERT_FILE"),
+    dhfile: System.get_env("SSL_DHPARAM_FILE")
+  ]
 
 # Do not print debug messages in production
 config :logger, level: :info
