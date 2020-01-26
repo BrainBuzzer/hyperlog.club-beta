@@ -22,6 +22,16 @@ defmodule HyperlogWeb.UserController do
     end
   end
 
+  def assign_role(conn, %{"roles" => %{"experience_role" => role1, "position_role" => role2}}) do
+    received_roles = [role1, role2]
+    with {:ok, user} <- add_role(Pow.Plug.current_user(conn), received_roles) do
+      conn
+      |> sync_user(user)
+      |> put_flash(:info, "Roles Assigned!")
+      |> render("home.html")
+    end
+  end
+
   defp add_role(user, roles_id) do
     {:ok, user} = Accounts.assign_role_to_user(user, roles_id)
     HyperlogWeb.MessagingQueue.send_role_data(user.discord.discord_uid, roles_id, "ADD_ROLE")
