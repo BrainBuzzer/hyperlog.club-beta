@@ -13,7 +13,7 @@
 alias Hyperlog.Courses
 alias Hyperlog.Accounts
 
-roles = [
+dev_roles = [
   %{name: "Beginner Role", discord_id: "653880931320463361", type: "experience"},
   %{name: "Intermediate Role", discord_id: "653881077118533633", type: "experience"},
   %{name: "Advanced Role", discord_id: "655131756277530634", type: "experience"},
@@ -27,8 +27,28 @@ roles = [
   %{name: "JavaScript", discord_id: "1231", type: "language"}
 ]
 
-for role <- roles do
-  Accounts.create_role(role)
+prod_roles = [
+  %{name: "Newbie", discord_id: "635163076345331751", type: "experience"},
+  %{name: "Intermediate", discord_id: "635163115872321576", type: "experience"},
+  %{name: "Advanced", discord_id: "635163358684905492", type: "experience"},
+  %{name: "Student", discord_id: "635163468755894302", type: "position"},
+  %{name: "Professional", discord_id: "635163852727910419", type: "position"},
+  %{name: "C", discord_id: "626820700690317328", type: "language"},
+  %{name: "C++", discord_id: "635162595355000834", type: "language"},
+  %{name: "Elixir", discord_id: "635162976407519243", type: "language"},
+  %{name: "JavaScript", discord_id: "635163033471287327", type: "language"},
+  %{name: "Python", discord_id: "670958995934150667", type: "language"}
+]
+
+case Mix.env() do
+  :dev ->
+    for role <- dev_roles do
+      Accounts.create_role(role)
+    end
+  :prod ->
+    for role <- prod_roles do
+      Accounts.create_role(role)
+    end
 end
 
 %HTTPoison.Response{status_code: 200, body: body} = HTTPoison.get! "https://raw.githubusercontent.com/BrainBuzzer/hyperlog-curriculum/master/courses.yaml"
