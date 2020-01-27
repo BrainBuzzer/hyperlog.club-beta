@@ -15,14 +15,14 @@
         <%= if @current_user.github_connected do %>
           <button class="btn btn-large btn-block" type="button" aria-disabled="true"><i class="fab fa-github fa-lg"></i> Github Connected 🎉</button>
         <% else %>
-          <a href="/auth/github"><button class="btn btn-large btn-block"><i class="fab fa-github fa-lg"></i> Connect to Github</button></a>
+          <a href="/auth/github" class="btn btn-large btn-block"><i class="fab fa-github fa-lg"></i> Connect to Github</a>
         <% end %>
       </div>
       <div class="Box-row d-flex flex-justify-center">
         <%= if @current_user.discord_connected do %>
           <button class="btn btn-large btn-block bg-purple text-white" aria-disabled="true"><i class="fab fa-discord fa-lg"></i> Discord Connected 🎉</button>
         <% else %>
-          <a href="/auth/discord"><button class="btn btn-large btn-block bg-purple text-white"><i class="fab fa-discord fa-lg"></i> Connect to Discord</button></a>
+          <a href="/auth/discord" class="btn btn-large btn-block btn-outline"><i class="fab fa-discord fa-lg"></i> Connect to Discord</a>
         <% end %>
       </div>
     </div>
