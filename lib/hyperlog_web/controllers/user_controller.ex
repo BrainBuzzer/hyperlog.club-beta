@@ -9,7 +9,27 @@ defmodule HyperlogWeb.UserController do
 
   def roles_page(conn, _params) do
     roles = Accounts.list_roles
-    render(conn, "roles.html", roles: roles)
+    current_user = Pow.Plug.current_user(conn)
+    user = Hyperlog.Accounts.get_user!(current_user.id)
+    experience_current_role = Enum.at(Enum.flat_map(user.roles, fn role ->
+      case String.equivalent?("experience", role.type) do
+        true -> [role.discord_id]
+        false -> []
+      end
+    end), 0)
+    position_current_role = Enum.at(Enum.flat_map(user.roles, fn role ->
+      case String.equivalent?("position", role.type) do
+        true -> [role.discord_id]
+        false -> []
+      end
+    end), 0)
+    languages = Enum.flat_map(user.roles, fn role ->
+      case String.equivalent?("language", role.type) do
+        true -> [role.discord_id]
+        false -> []
+      end
+    end)
+    render(conn, "roles.html", [roles: roles, experience: experience_current_role, position: position_current_role, languages: languages])
   end
 
   def assign_role(conn, %{"roles" => %{"experience_role" => role1, "position_role" => role2, "language_role" => role_array}}) do

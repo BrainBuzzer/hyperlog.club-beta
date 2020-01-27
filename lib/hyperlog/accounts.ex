@@ -235,24 +235,19 @@ defmodule Hyperlog.Accounts do
 
   def assign_role_to_user(%User{} = user, role_id) do
     roles = Enum.map(role_id, fn id -> get_role_discord_id!(id) end)
+    {:ok, user} = delete_roles_from_user(user)
     user
     |> Repo.preload([:roles, :discord])
-    |> User.changeset(%{onboard_complete: true})
     |> Ecto.Changeset.change
     |> Ecto.Changeset.put_assoc(:roles, roles)
     |> Repo.update()
   end
 
-  def unassigns_roles_from_user(%User{} = user, role_id) do
-    roles =
-      Enum.map(role_id, fn id -> get_role_discord_id!(id) end)
-      |> Enum.concat(user.roles)
-      |> Enum.uniq()
-
+  def delete_roles_from_user(%User{} = user) do
     user
     |> Repo.preload([:roles, :discord])
     |> Ecto.Changeset.change
-    |> Ecto.Changeset.put_assoc(:roles, roles)
+    |> Ecto.Changeset.put_assoc(:roles, [])
     |> Repo.update
   end
 

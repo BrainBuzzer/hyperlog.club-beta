@@ -17,7 +17,7 @@
                 true -> [{role.name, role.discord_id}]
                 false -> []
               end
-            end), class: "form-select input-block") %>
+            end), [prompt: "Select your experience", class: "form-select input-block", selected: @experience ]) %>
           </div>
           <div class="form-group">
             <%= label(f, :position_role, "What describes you the best?") %>
@@ -26,7 +26,7 @@
                 true -> [{role.name, role.discord_id}]
                 false -> []
               end
-            end), class: "form-select input-block") %>
+            end), [prompt: "Select your position", class: "form-select input-block", selected: @position ]) %>
           </div>
           <div class="form-group">
             <%= label(f, :language_role, "How experienced are you in programming?") %>
@@ -35,7 +35,7 @@
                 true -> [{role.name, role.discord_id}]
                 false -> []
               end
-            end), class: "form-select input-block") %>
+            end), [class: "form-select input-block", selected: @languages ]) %>
           </div>
           <div class="form-actions float-left">
             <%= submit "Submit", class: "btn btn-primary" %>
