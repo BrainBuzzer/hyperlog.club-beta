@@ -8,8 +8,8 @@
       Eat. Sleep. Code. Repeat.
     </div>
     <div class="d-flex flex-justify-center">
-      <a class="cta mr-5" href="<%= Routes.pow_registration_path(@conn, :new) %>"><button class="btn-mktg btn-primary-mktg"><i class="fa fa-user-plus fa-lg"></i> Register now</button></a>
-      <a class="cta" href="<%= Routes.pow_session_path(@conn, :new) %>"><button class="btn-mktg"><i class="fa fa-user fa-lg"></i> Login</button></a>
+      <a class="cta mr-5" href="<%= Routes.signup_path(@conn, :new) %>"><button class="btn-mktg btn-primary-mktg"><i class="fa fa-user-plus fa-lg"></i> Register now</button></a>
+      <a class="cta" href="<%= Routes.login_path(@conn, :new) %>"><button class="btn-mktg"><i class="fa fa-user fa-lg"></i> Login</button></a>
     </div>
   </div>
 </section>

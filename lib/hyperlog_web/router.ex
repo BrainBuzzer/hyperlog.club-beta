@@ -12,34 +12,37 @@ defmodule HyperlogWeb.Router do
 
   pipeline :protected do
     plug Pow.Plug.RequireAuthenticated,
-      error_handler: Pow.Phoenix.PlugErrorHandler
+      error_handler: HyperlogWeb.AuthErrorHandler
+  end
+
+  pipeline :not_protected do
+    plug Pow.Plug.RequireNotAuthenticated,
+      error_handler: HyperlogWeb.AuthErrorHandler
   end
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  scope "/" do
-    pipe_through :browser
-
-    pow_routes()
-  end
-
   scope "/", HyperlogWeb do
-    pipe_through :browser
+    pipe_through [:browser, :not_protected]
 
     get "/", PageController, :index
-
-    get "/courses/javascript/:chapter_slug/:lesson_slug", CourseController, :javascript_course_start
-
-    get "/u/:username", UserController, :user_overview_page
+    get "/signup", RegistrationController, :new, as: :signup
+    post "/signup", RegistrationController, :create, as: :signup
+    get "/login", SessionController, :new, as: :login
+    post "/login", SessionController, :create, as: :login
   end
 
   scope "/", HyperlogWeb do
     pipe_through [:browser, :protected]
+
+    delete "/logout", SessionController, :delete, as: :logout
+
     get "/auth/:provider/", AuthController, :request
     get "/auth/:provider/callback", AuthController, :callback
 
+    get "/u/:username", UserController, :user_overview_page
     get "/profile", UserController, :profile_page
     get "/profile/roles", UserController, :roles_page
     get "/home", UserController, :home
@@ -53,6 +56,8 @@ defmodule HyperlogWeb.Router do
 
     post "/profile/roles", UserController, :assign_role
     post "/profile/delete", UserController, :delete_user_profile
+
+    get "/courses/javascript/:chapter_slug/:lesson_slug", CourseController, :javascript_course_start
   end
 
   scope "/.well-known/acme-challenge", HyperlogWeb do
