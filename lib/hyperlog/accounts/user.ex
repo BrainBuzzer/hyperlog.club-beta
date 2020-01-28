@@ -11,6 +11,7 @@ defmodule Hyperlog.Accounts.User do
     field :name, :string
     field :username, :string
 
+    has_one :profile, Hyperlog.Profile.User
     has_one :discord, Hyperlog.Accounts.Discord
     has_one :github, Hyperlog.Accounts.Github
     has_many :projects, Hyperlog.Project.MetaData

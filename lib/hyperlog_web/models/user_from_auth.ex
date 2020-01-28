@@ -11,7 +11,6 @@ defmodule UserFromAuth do
   defp avatar_from_auth(%{info: %{urls: %{avatar_url: image}}}), do: image
 
   defp basic_info(auth) do
-    IO.inspect auth
     %{
       id: auth.uid,
       avatar: avatar_from_auth(auth),

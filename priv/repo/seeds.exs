@@ -12,6 +12,7 @@
 
 alias Hyperlog.Courses
 alias Hyperlog.Accounts
+alias Hyperlog.Profile
 
 dev_roles = [
   %{name: "Beginner Role", discord_id: "653880931320463361", type: "experience"},
@@ -49,6 +50,16 @@ case Mix.env() do
     for role <- prod_roles do
       Accounts.create_role(role)
     end
+end
+
+achievements = [
+  %{name: "HelloWorld()", description: "Welcome to the community!", xp_gain: 0, badge: "https://image.flaticon.com/icons/png/512/87/87140.png", achievement_uid: "hello_world"},
+  %{name: "ConnectDiscord()", description: "Connect to the Discord Account!", xp_gain: 10, badge: "https://image.flaticon.com/icons/png/512/87/87140.png", achievement_uid: "connect_discord"},
+  %{name: "ConnectGithub()", description: "Connect to the GitHub Account!", xp_gain: 10, badge: "https://image.flaticon.com/icons/png/512/87/87140.png", achievement_uid: "connect_github"}
+]
+
+for achievement <- achievements do
+  Profile.create_achievements(achievement)
 end
 
 %HTTPoison.Response{status_code: 200, body: body} = HTTPoison.get! "https://raw.githubusercontent.com/BrainBuzzer/hyperlog-curriculum/master/courses.yaml"

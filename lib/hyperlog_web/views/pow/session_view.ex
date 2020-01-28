@@ -1,3 +1,3 @@
-defmodule HyperlogWeb.Pow.SessionView do
+defmodule HyperlogWeb.SessionView do
   use HyperlogWeb, :view
 end

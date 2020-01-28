@@ -59,7 +59,6 @@ defmodule HyperlogWeb.UserController do
   end
 
   def profile_page(conn, _params) do
-    IO.inspect conn
     render(conn, "profile.html", current_user: Pow.Plug.current_user(conn))
   end
 
