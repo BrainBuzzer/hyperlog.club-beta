@@ -133,6 +133,8 @@ defmodule Hyperlog.Profile do
   """
   def get_achievements!(id), do: Repo.get!(Achievements, id)
 
+  def get_achievement_by_uid(uid), do: Repo.get_by(Achievements, achievement_uid: uid)
+
   @doc """
   Creates a achievements.
 
@@ -198,11 +200,12 @@ defmodule Hyperlog.Profile do
     Achievements.changeset(achievements, %{})
   end
 
-  def add_achievement_to_user(%User{} = user, achievements) do
-    achievements = Enum.map(achievements, fn id -> get_achievements!(id) end)
+  def add_achievement_to_user(profile_id, achievement_uid) do
+    achievement = get_achievement_by_uid(achievement_uid)
+    user = get_user!(profile_id)
     user
     |> Ecto.Changeset.change
-    |> Ecto.Changeset.put_assoc(:achievements, achievements)
+    |> Ecto.Changeset.put_assoc(:achievements, [achievement])
     |> Repo.update()
   end
 end

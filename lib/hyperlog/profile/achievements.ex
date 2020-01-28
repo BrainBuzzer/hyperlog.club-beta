@@ -7,6 +7,8 @@ defmodule Hyperlog.Profile.Achievements do
     field :description, :string
     field :name, :string
     field :xp_gain, :integer
+    field :achievement_uid, :string
+
     many_to_many :users, Hyperlog.Profile.User, join_through: "users_achievements", on_replace: :delete
 
     timestamps()

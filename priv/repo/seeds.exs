@@ -53,9 +53,9 @@ case Mix.env() do
 end
 
 achievements = [
-  %{name: "HelloWorld()", description: "Welcome to the community!", xp_gain: 0, badge: "https://image.flaticon.com/icons/png/512/87/87140.png"},
-  %{name: "ConnectDiscord()", description: "Connect to the Discord Account!", xp_gain: 10, badge: "https://image.flaticon.com/icons/png/512/87/87140.png"},
-  %{name: "ConnectGithub()", description: "Connect to the GitHub Account!", xp_gain: 10, badge: "https://image.flaticon.com/icons/png/512/87/87140.png"}
+  %{name: "HelloWorld()", description: "Welcome to the community!", xp_gain: 0, badge: "https://image.flaticon.com/icons/png/512/87/87140.png", achievement_uid: "hello_world"},
+  %{name: "ConnectDiscord()", description: "Connect to the Discord Account!", xp_gain: 10, badge: "https://image.flaticon.com/icons/png/512/87/87140.png", achievement_uid: "connect_discord"},
+  %{name: "ConnectGithub()", description: "Connect to the GitHub Account!", xp_gain: 10, badge: "https://image.flaticon.com/icons/png/512/87/87140.png", achievement_uid: "connect_github"}
 ]
 
 for achievement <- achievements do

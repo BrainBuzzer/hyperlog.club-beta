@@ -5,6 +5,7 @@ defmodule Hyperlog.Accounts do
 
   import Ecto.Query, warn: false
   alias Hyperlog.Repo
+  alias Hyperlog.Profile
 
   alias Hyperlog.Accounts.User
   alias Hyperlog.Accounts.Role
@@ -36,7 +37,7 @@ defmodule Hyperlog.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:discord, :github, :projects, :roles])
+  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:discord, :github, :projects, :roles, :profile])
 
   def get_user_by_username(username), do: Repo.get_by(User, username: username) |> Repo.preload([:projects, :roles])
 
@@ -210,6 +211,8 @@ defmodule Hyperlog.Accounts do
   end
 
   def connect_discord(%User{} = user, auth) do
+    user = Repo.preload(user, :profile)
+    Profile.add_achievement_to_user(user.profile.id, "connect_discord")
     {:ok, user} = update_user(user, %{discord_connected: true})
     changeset = Ecto.build_assoc(user, :discord, %Discord{
       access_token: auth.credentials.token,
@@ -348,6 +351,8 @@ defmodule Hyperlog.Accounts do
   end
 
   def link_user_with_github(user, token) do
+    user = Repo.preload(user, :profile)
+    Profile.add_achievement_to_user(user.profile.id, "connect_github")
     {:ok, user} = update_user(user, %{github_connected: true})
     changeset = Ecto.build_assoc(user, :github, %Github{
       access_token: token
