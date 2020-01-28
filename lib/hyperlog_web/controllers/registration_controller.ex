@@ -1,5 +1,6 @@
 defmodule HyperlogWeb.RegistrationController do
   use HyperlogWeb, :controller
+  alias Hyperlog.Repo
 
   def new(conn, _params) do
     # We'll leverage [`Pow.Plug`](Pow.Plug.html), but you can also follow the classic Phoenix way:
@@ -21,6 +22,8 @@ defmodule HyperlogWeb.RegistrationController do
     |> Pow.Plug.create_user(user_params)
     |> case do
       {:ok, user, conn} ->
+        {:ok, user_profile} = Ecto.build_assoc(user, :profile, %Hyperlog.Profile.User{}) |> Repo.insert!
+        Hyperlog.Profile.add_achievement_to_user(user_profile.id, "hello_world")
         conn
         |> put_flash(:info, "Welcome!")
         |> redirect(to: Routes.user_path(conn, :home))
