@@ -13,6 +13,6 @@ defmodule HyperlogWeb.AuthErrorHandler do
   def call(conn, :already_authenticated) do
     conn
     |> put_flash(:error, "You're already authenticated")
-    |> redirect(to: Routes.page_path(conn, :index))
+    |> redirect(to: Routes.user_path(conn, :home))
   end
 end
