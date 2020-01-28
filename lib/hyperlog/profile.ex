@@ -18,7 +18,7 @@ defmodule Hyperlog.Profile do
 
   """
   def list_user_profile do
-    Repo.all(User)
+    Repo.all(User) |> Repo.preload(:achievements)
   end
 
   @doc """
