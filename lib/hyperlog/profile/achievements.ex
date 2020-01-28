@@ -17,7 +17,7 @@ defmodule Hyperlog.Profile.Achievements do
   @doc false
   def changeset(achievements, attrs) do
     achievements
-    |> cast(attrs, [:name, :badge, :xp_gain, :description])
-    |> validate_required([:name, :badge, :xp_gain, :description])
+    |> cast(attrs, [:name, :badge, :xp_gain, :description, :achievement_uid])
+    |> validate_required([:name, :badge, :xp_gain, :description, :achievement_uid])
   end
 end
