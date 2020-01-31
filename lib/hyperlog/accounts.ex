@@ -353,6 +353,7 @@ defmodule Hyperlog.Accounts do
   def link_user_with_github(user, token) do
     user = Repo.preload(user, :profile)
     Profile.add_achievement_to_user(user.profile.id, "connect_github")
+    {:ok, _} = HyperlogWeb.PullGithubData.pull_data(user.id, token)
     {:ok, user} = update_user(user, %{github_connected: true})
     changeset = Ecto.build_assoc(user, :github, %Github{
       access_token: token

@@ -22,7 +22,7 @@ defmodule HyperlogWeb.RegistrationController do
     |> Pow.Plug.create_user(user_params)
     |> case do
       {:ok, user, conn} ->
-        {:ok, user_profile} = Ecto.build_assoc(user, :profile, %Hyperlog.Profile.User{}) |> Repo.insert!
+        user_profile = Ecto.build_assoc(user, :profile, %Hyperlog.Profile.User{}) |> Repo.insert!
         Hyperlog.Profile.add_achievement_to_user(user_profile.id, "hello_world")
         conn
         |> put_flash(:info, "Welcome!")
