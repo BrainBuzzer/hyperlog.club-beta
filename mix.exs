@@ -53,6 +53,7 @@ defmodule Hyperlog.MixProject do
       {:earmark, "~> 1.4.3"},
       {:httpoison, "~> 1.6"},
       {:yaml_elixir, "~> 2.4.0"},
+      {:neuron, "~> 4.1.0"},
       poison: "~> 3.1"
     ]
   end
