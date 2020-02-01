@@ -42,7 +42,6 @@ defmodule Hyperlog.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:pow, "~> 1.0.16"},
-      {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:ueberauth, "~> 0.6"},
       {:oauth2, "~> 2.0", override: true},
@@ -54,6 +53,8 @@ defmodule Hyperlog.MixProject do
       {:httpoison, "~> 1.6"},
       {:yaml_elixir, "~> 2.4.0"},
       {:neuron, "~> 4.1.0"},
+      {:sentry, "~> 7.0"},
+      {:jason, "~> 1.1"},
       poison: "~> 3.1"
     ]
   end

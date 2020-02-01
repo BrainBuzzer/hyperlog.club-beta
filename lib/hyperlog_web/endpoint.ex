@@ -1,5 +1,6 @@
 defmodule HyperlogWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :hyperlog
+  use Sentry.Phoenix.Endpoint
 
   socket "/socket", HyperlogWeb.UserSocket,
     websocket: true,

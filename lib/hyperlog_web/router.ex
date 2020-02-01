@@ -1,5 +1,7 @@
 defmodule HyperlogWeb.Router do
   use HyperlogWeb, :router
+  use Plug.ErrorHandler
+  use Sentry.Plug
   use Pow.Phoenix.Router
 
   pipeline :browser do
