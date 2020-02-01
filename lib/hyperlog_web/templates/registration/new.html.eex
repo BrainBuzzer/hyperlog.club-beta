@@ -10,23 +10,17 @@
           <p>Oops, something went wrong! Please check the errors below.</p>
         </div>
       <% end %>
-      <div class="form-group mb-2 <%= error_class f, Pow.Ecto.Schema.user_id_field(@changeset) %>">
-        <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-        <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), [class: "form-control input-block", placeholder: "Email"] %>
-        <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-      </div>
-
       <div class="form-group mb-2 <%= error_class f, :name %>">
         <%= label f, :name %>
         <%= text_input f, :name, [class: "form-control input-block", placeholder: "Name"] %>
         <%= error_tag f, :name %>
       </div>
 
-      <div class="form-group mb-2 <%= error_class f, :username %>">
-        <%= label f, :username %>
-        <%= text_input f, :username, [class: "form-control input-block", placeholder: "Username"]  %>
-        <%= error_tag f, :username %>
-    </div>
+      <div class="form-group mb-2 <%= error_class f, Pow.Ecto.Schema.user_id_field(@changeset) %>">
+        <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+        <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), [class: "form-control input-block", placeholder: "Email"] %>
+        <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+      </div>
 
       <div class="form-group mb-2 <%= error_class f, :password %>">
         <%= label f, :password %>

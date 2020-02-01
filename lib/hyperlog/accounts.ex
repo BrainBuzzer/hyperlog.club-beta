@@ -39,8 +39,6 @@ defmodule Hyperlog.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id) |> Repo.preload([:discord, :github, :projects, :roles, :profile])
 
-  def get_user_by_username(username), do: Repo.get_by(User, username: username) |> Repo.preload([:projects, :roles])
-
   @doc """
   Creates a user.
 

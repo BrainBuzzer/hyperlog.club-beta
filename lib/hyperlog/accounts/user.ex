@@ -9,7 +9,6 @@ defmodule Hyperlog.Accounts.User do
     field :discord_connected, :boolean, default: false
     field :github_connected, :boolean, default: false
     field :name, :string
-    field :username, :string
 
     has_one :profile, Hyperlog.Profile.User
     has_one :discord, Hyperlog.Accounts.Discord
@@ -25,10 +24,9 @@ defmodule Hyperlog.Accounts.User do
     user
     |> pow_user_id_field_changeset(attrs)
     |> pow_password_changeset(attrs)
-    |> cast(attrs, [:name, :email, :username, :github_connected, :discord_connected])
-    |> validate_required([:name, :email, :username, :github_connected, :discord_connected])
+    |> cast(attrs, [:name, :email, :github_connected, :discord_connected])
+    |> validate_required([:name, :email, :github_connected, :discord_connected])
     |> unique_constraint(:email)
-    |> unique_constraint(:username)
     |> foreign_key_constraint(:roles_id)
   end
 end
