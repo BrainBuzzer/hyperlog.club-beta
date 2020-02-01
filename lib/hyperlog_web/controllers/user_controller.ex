@@ -54,7 +54,8 @@ defmodule HyperlogWeb.UserController do
 
   defp add_role(user, roles_id) do
     {:ok, user} = Accounts.assign_role_to_user(user, roles_id)
-    HyperlogWeb.MessagingQueue.send_role_data(user.discord.discord_uid, roles_id, "ADD_ROLE")
+    discord = Hyperlog.Repo.get_by(Hyperlog.Accounts.Discord, %{user_id: user.id})
+    HyperlogWeb.MessagingQueue.send_role_data(discord.discord_uid, roles_id, "ADD_ROLE")
     {:ok, user}
   end
 
