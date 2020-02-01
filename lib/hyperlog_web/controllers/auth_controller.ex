@@ -18,7 +18,7 @@ defmodule HyperlogWeb.AuthController do
           sign_in_user(user, conn)
         end
       :discord ->
-        with {:ok, user} <- Accounts.get_user_by_email(%{email: auth.info.email}) do
+        with {:ok, user} <- Accounts.get_user_by_email(%{email: Pow.Plug.current_user(conn).email}) do
           if user.discord_connected do
             conn
             |> put_flash(:info, "Discord is already connected")
