@@ -13,13 +13,14 @@ defmodule HyperlogWeb.ProjectController do
   end
 
   def user_project_new(conn, _params) do
-    {:ok, %HTTPoison.Response{body: repos}} = HTTPoison.get("https://api.github.com/users/#{conn.assigns.current_user.username}/repos?per_page=1000")
-    repos = Poison.decode!(repos)
-    render(conn, "new.html", repos: repos)
+    user = Pow.Plug.current_user(conn)
+    github = Hyperlog.Accounts.get_github_by_user(user.id)
+    {:ok, %Neuron.Response{body: body}} = HyperlogWeb.PullGithubData.pull_user_repo(github.access_token)
+    render(conn, "new.html", repos: body["data"]["viewer"]["repositories"]["edges"])
   end
 
-  def user_create_project_new(conn, %{"repo_name" => repo_name}) do
-    {:ok, %HTTPoison.Response{body: repo}} = HTTPoison.get("https://api.github.com/repos/#{conn.assigns.current_user.username}/#{repo_name}")
+  def user_create_project_new(conn, %{"repo_name" => repo_name, "username" => username}) do
+    {:ok, %HTTPoison.Response{body: repo}} = HTTPoison.get("https://api.github.com/repos/#{username}/#{repo_name}")
     repo = Poison.decode!(repo)
     changeset = MetaData.changeset(%MetaData{}, %{
       name: repo["name"],
@@ -32,10 +33,10 @@ defmodule HyperlogWeb.ProjectController do
   def user_create_new_project_post(conn, %{"meta_data" => project_params}) do
     user = Accounts.get_user!(conn.assigns.current_user.id)
     case Project.create_project(user, project_params) do
-      {:ok, _project} ->
+      {:ok, project} ->
         conn
         |> put_flash(:info, "Project created successfully.")
-        |> redirect(to: "/")
+        |> redirect(to: "/project/#{project.id}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "create.html", changeset: changeset)

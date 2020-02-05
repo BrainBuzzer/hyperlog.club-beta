@@ -2,10 +2,10 @@
 
 <div class="list-select-projects">
   <%= for repo <- @repos do %>
-    <a class="project-selection-individual" href=<%= "/projects/create/#{repo["name"]}" %>>
-      <div class="project-selection-individual__name"><%= repo["full_name"] %></div>
-      <div class="project-selection-individual__stars"><%= repo["stargazers_count"] %> <i class="fa fa-star"></i></div>
-      <div class="project-selection-individual__description"><%= repo["description"] %></div>
+    <a class="project-selection-individual" href=<%= "/projects/create/#{repo["node"]["nameWithOwner"]}" %>>
+      <div class="project-selection-individual__name"><%= repo["node"]["nameWithOwner"] %></div>
+      <div class="project-selection-individual__stars"><%= repo["node"]["stargazers"]["totalCount"] %> <i class="fa fa-star"></i></div>
+      <div class="project-selection-individual__description"><%= repo["node"]["description"] %></div>
     </a>
   <% end %>
 </div>

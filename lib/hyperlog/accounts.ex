@@ -283,6 +283,8 @@ defmodule Hyperlog.Accounts do
   """
   def get_github!(id), do: Repo.get!(Github, id)
 
+  def get_github_by_user(user_id), do: Repo.get_by(Github, %{user_id: user_id})
+
   @doc """
   Creates a github.
 

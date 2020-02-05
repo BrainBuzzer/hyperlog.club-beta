@@ -2,6 +2,28 @@ defmodule HyperlogWeb.PullGithubData do
   alias Hyperlog.Repo
   alias Hyperlog.Profile
 
+  def pull_user_repo(access_token) do
+    Neuron.Config.set(url: "https://api.github.com/graphql")
+    Neuron.Config.set(headers: [Authorization: "bearer #{access_token}"])
+    Neuron.query("""
+      query {
+        viewer {
+          repositories(orderBy: {field: NAME, direction: ASC}, first: 100, isFork: false) {
+            edges {
+              node {
+                nameWithOwner
+                description
+                stargazers{
+                  totalCount
+                }
+              }
+            }
+          }
+        }
+      }
+    """)
+  end
+
   def pull_data(user_id, access_token) do
     Neuron.Config.set(url: "https://api.github.com/graphql")
     Neuron.Config.set(headers: [Authorization: "bearer #{access_token}"])
