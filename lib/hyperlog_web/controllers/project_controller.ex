@@ -13,28 +13,20 @@ defmodule HyperlogWeb.ProjectController do
   end
 
   def user_project_new(conn, _params) do
-    if conn.assigns.current_user do
-      {:ok, %HTTPoison.Response{body: repos}} = HTTPoison.get("https://api.github.com/users/#{conn.assigns.current_user.username}/repos?per_page=1000")
-      repos = Poison.decode!(repos)
-      render(conn, "new.html", repos: repos)
-    else
-      redirect(conn, to: "/")
-    end
+    {:ok, %HTTPoison.Response{body: repos}} = HTTPoison.get("https://api.github.com/users/#{conn.assigns.current_user.username}/repos?per_page=1000")
+    repos = Poison.decode!(repos)
+    render(conn, "new.html", repos: repos)
   end
 
   def user_create_project_new(conn, %{"repo_name" => repo_name}) do
-    if conn.assigns.current_user do
-      {:ok, %HTTPoison.Response{body: repo}} = HTTPoison.get("https://api.github.com/repos/#{conn.assigns.current_user.username}/#{repo_name}")
-      repo = Poison.decode!(repo)
-      changeset = MetaData.changeset(%MetaData{}, %{
-        name: repo["name"],
-        description: repo["description"],
-        link: repo["html_url"]
-      })
-      render(conn, "create.html", changeset: changeset)
-    else
-      redirect(conn, to: "/")
-    end
+    {:ok, %HTTPoison.Response{body: repo}} = HTTPoison.get("https://api.github.com/repos/#{conn.assigns.current_user.username}/#{repo_name}")
+    repo = Poison.decode!(repo)
+    changeset = MetaData.changeset(%MetaData{}, %{
+      name: repo["name"],
+      description: repo["description"],
+      link: repo["html_url"]
+    })
+    render(conn, "create.html", changeset: changeset)
   end
 
   def user_create_new_project_post(conn, %{"meta_data" => project_params}) do
