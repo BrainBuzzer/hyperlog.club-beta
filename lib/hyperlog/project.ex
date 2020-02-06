@@ -37,7 +37,11 @@ defmodule Hyperlog.Project do
   """
   def get_meta_data!(id), do: Repo.get!(MetaData, id)
 
-  def get_projects_by_user_id(user_id), do: Repo.all(MetaData, user_id: user_id)
+  def get_projects_by_user_id(user_id) do
+    MetaData
+    |> where(user_id: ^user_id)
+    |> Repo.all()
+  end
 
   @doc """
   Creates a meta_data.
