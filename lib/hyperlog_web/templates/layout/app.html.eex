@@ -6,9 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Hyperlog</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TZLGR6P');</script>
+    <!-- End Google Tag Manager -->
     <script src="https://kit.fontawesome.com/a0b4631295.js" crossorigin="anonymous"></script>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TZLGR6P"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <header>
       <%= if @current_user do %>
         <a href="/home" class="logo"><img class="logo" src="<%= Routes.static_path(@conn, "/images/hyperlog.png") %>" alt="Logo"/></a>
