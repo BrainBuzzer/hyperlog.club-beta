@@ -5,18 +5,25 @@ defmodule HyperlogWeb.ProjectController do
   alias Hyperlog.Accounts
 
   def user_projects(conn, _params) do
-    projects = Project.get_projects_by_user_id(conn.assigns.current_user.id)
+    user = Pow.Plug.current_user(conn)
+    projects = Project.get_projects_by_user_id(user.id)
     conn
     |> assign(:projects, projects)
-    |> assign(:current_user, conn.assigns.current_user)
     |> render("projects.html")
   end
 
   def user_project_new(conn, _params) do
     user = Pow.Plug.current_user(conn)
-    github = Hyperlog.Accounts.get_github_by_user(user.id)
-    {:ok, %Neuron.Response{body: body}} = HyperlogWeb.PullGithubData.pull_user_repo(github.access_token)
-    render(conn, "new.html", repos: body["data"]["viewer"]["repositories"]["edges"])
+    case user.github_connected do
+      true ->
+        github = Hyperlog.Accounts.get_github_by_user(user.id)
+        {:ok, %Neuron.Response{body: body}} = HyperlogWeb.PullGithubData.pull_user_repo(github.access_token)
+        render(conn, "new.html", repos: body["data"]["viewer"]["repositories"]["edges"])
+      false ->
+        conn
+        |> put_flash(:error, "Please connect to GitHub to create new projects")
+        |> redirect(to: "/home")
+    end
   end
 
   def user_create_project_new(conn, %{"repo_name" => repo_name, "username" => username}) do
