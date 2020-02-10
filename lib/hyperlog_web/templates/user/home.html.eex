@@ -54,7 +54,7 @@
       </div>
       <div class="Box-row d-flex flex-justify-center">
         <%= if @current_user.discord_connected do %>
-          <button class="btn btn-large btn-block bg-purple text-white" aria-disabled="true"><i class="fab fa-discord fa-lg"></i> Discord Connected 🎉</button>
+          <a class="discord-button" href="https://discordapp.com/channels/619842449828872212/619842449828872215"><i class="fab fa-discord fa-lg"></i> Open Discord</a>
         <% else %>
           <a href="/auth/discord" class="btn btn-large btn-block btn-outline"><i class="fab fa-discord fa-lg"></i> Connect to Discord</a>
         <% end %>
