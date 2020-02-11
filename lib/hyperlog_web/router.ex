@@ -27,6 +27,12 @@ defmodule HyperlogWeb.Router do
   end
 
   scope "/", HyperlogWeb do
+    pipe_through :browser
+    get "/tos", PageController, :terms_of_service
+    get "/privacy", PageController, :privacy
+  end
+
+  scope "/", HyperlogWeb do
     pipe_through [:browser, :not_protected]
 
     get "/", PageController, :index
