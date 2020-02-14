@@ -55,6 +55,7 @@ defmodule Hyperlog.MixProject do
       {:neuron, "~> 4.1.1"},
       {:sentry, "~> 7.0"},
       {:jason, "~> 1.1"},
+      {:mongodb, ">= 0.0.0"},
       poison: "~> 3.1"
     ]
   end

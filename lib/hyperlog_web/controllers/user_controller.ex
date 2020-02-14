@@ -4,7 +4,9 @@ defmodule HyperlogWeb.UserController do
   alias Hyperlog.Accounts
 
   def home(conn, _params) do
-    render(conn, "home.html")
+    {:ok, mongo_conn} = Mongo.start_link(url: "mongodb://localhost:27017/hyperlog")
+    doc = Mongo.find_one(mongo_conn, "user_stats", %{email: %{"$eq": Pow.Plug.current_user(conn).email}})
+    render(conn, "home.html", user_stats: doc)
   end
 
   def roles_page(conn, _params) do

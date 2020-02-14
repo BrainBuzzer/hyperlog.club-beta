@@ -1,12 +1,20 @@
 <div class="container-lg clearfix mt-5">
   <!-- Main Content -->
   <div class="col-lg-8 col-md-12 col-sm-12 float-left p-responsive">
+    <div class="p-responsive">
+      <h2>Your commits as per time period</h2>
+      <canvas id="hourlyStats" width="400" height="100"></canvas>
+    </div>
+    <div class="p-responsive">
+      <h2>Number of commits on weekdays</h2>
+      <canvas id="weeklyStats" width="400" height="100"></canvas>
+    </div>
     <!-- Info Flash Section -->
     <div class="flash mb-2">
       <i class="fa fa-info-circle"></i>&nbsp;
       VS Code extension is coming soon!
     </div>
-    
+
     <div class="flash mb-2">
       <i class="fa fa-info-circle"></i>&nbsp;
       New courses coming soon! Stay Tuned.
@@ -62,3 +70,41 @@
     </div>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script>
+const hourlyDOM = document.getElementById("hourlyStats")
+
+const hourlyChart = new Chart(hourlyDOM, {
+  type: 'bar',
+  data: {
+    labels: ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'],
+    datasets: [{
+      data: <%= Poison.encode!(@user_stats["stats"]["hourlyStats"]) %>,
+      backgroundColor: 'rgba(46, 204, 113,0.5)',
+      hoverBorderWidth: 1,
+      hoverBackgroundColor: 'rgba(46, 204, 113, 1)'
+    }]
+  },
+  options: {
+    tooltips: {
+      enabled: false,
+    },
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        display: false
+      }],
+      xAxes: [{
+        gridLines: {
+          display: false,
+          offset: false,
+          offsetGridLines: false
+        }
+      }]
+    }
+  }
+})
+</script>
