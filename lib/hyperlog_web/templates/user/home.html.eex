@@ -1,12 +1,19 @@
 <div class="container-lg clearfix mt-5">
   <!-- Main Content -->
   <div class="col-lg-8 col-md-12 col-sm-12 float-left p-responsive">
-    <div class="p-responsive">
-      <canvas id="hourlyStats" width="400" height="150"></canvas>
-    </div>
-    <div class="p-responsive">
-      <canvas id="weeklyStats" width="400" height="150"></canvas>
-    </div>
+    <%= if @current_user.github_connected do %>
+      <div class="p-responsive">
+        <canvas id="hourlyStats" width="400" height="150"></canvas>
+      </div>
+      <div class="p-responsive">
+        <canvas id="weeklyStats" width="400" height="150"></canvas>
+      </div>
+    <% else %>
+      <div class="flash">
+        <a href="/auth/github" class="btn btn-sm primary flash-action"><i class="fab fa-github fa-lg"></i> Connect with GitHub</a>
+        Connect with GitHub for more detailed dashboard
+      </div>
+    <% end %>
     <!-- Info Flash Section -->
 
     <!-- List courses -->
