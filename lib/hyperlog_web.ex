@@ -41,6 +41,7 @@ defmodule HyperlogWeb do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+      use HyperlogWeb.Helpers.Defaults
 
       import HyperlogWeb.ErrorHelpers
       import HyperlogWeb.Gettext
