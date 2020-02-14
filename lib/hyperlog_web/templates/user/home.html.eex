@@ -2,29 +2,12 @@
   <!-- Main Content -->
   <div class="col-lg-8 col-md-12 col-sm-12 float-left p-responsive">
     <div class="p-responsive">
-      <h2>Your commits as per time period</h2>
-      <canvas id="hourlyStats" width="400" height="100"></canvas>
+      <canvas id="hourlyStats" width="400" height="150"></canvas>
     </div>
     <div class="p-responsive">
-      <h2>Number of commits on weekdays</h2>
-      <canvas id="weeklyStats" width="400" height="100"></canvas>
+      <canvas id="weeklyStats" width="400" height="150"></canvas>
     </div>
     <!-- Info Flash Section -->
-    <div class="flash mb-2">
-      <i class="fa fa-info-circle"></i>&nbsp;
-      VS Code extension is coming soon!
-    </div>
-
-    <div class="flash mb-2">
-      <i class="fa fa-info-circle"></i>&nbsp;
-      New courses coming soon! Stay Tuned.
-    </div>
-
-    <div class="flash flash-success mb-2">
-      <a href="/projects" class="btn btn-primary btn-sm primary flash-action">Check out your Projects!</a>
-      <i class="fa fa-check-circle"></i>&nbsp;
-      Projects Support is out! 🥳
-    </div>
 
     <!-- List courses -->
     <section class="d-flex flex-column mt-5">
@@ -87,6 +70,67 @@ const hourlyChart = new Chart(hourlyDOM, {
     }]
   },
   options: {
+    title: {
+      display: true,
+      text: "Your Productivity throughout the day",
+      fontSize: 16
+    },
+    tooltips: {
+      enabled: false,
+    },
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        display: false
+      }],
+      xAxes: [{
+        gridLines: {
+          display: false,
+          offset: false,
+          offsetGridLines: false
+        }
+      }]
+    }
+  }
+})
+
+const weeklyDOM = document.getElementById('weeklyStats')
+
+const weeklyChart = new Chart(weeklyDOM, {
+  type: 'bar',
+  data: {
+    labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    datasets: [{
+      data: <%= Poison.encode!(to_charlist(@user_stats["stats"]["weeklyStats"])) %>,
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(26, 188, 156, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(26, 188, 156, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Your Productivity Day-wise",
+      fontSize: 16
+    },
     tooltips: {
       enabled: false,
     },
