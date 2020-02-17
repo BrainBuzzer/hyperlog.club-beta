@@ -41,6 +41,7 @@ defmodule HyperlogWeb.ProjectController do
     user = Accounts.get_user!(conn.assigns.current_user.id)
     case Project.create_project(user, project_params) do
       {:ok, project} ->
+        HyperlogWeb.MessagingQueue.send_github_project(project.link)
         conn
         |> put_flash(:info, "Project created successfully.")
         |> redirect(to: "/project/#{project.id}")

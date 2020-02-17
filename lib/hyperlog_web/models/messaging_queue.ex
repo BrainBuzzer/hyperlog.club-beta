@@ -23,6 +23,17 @@ defmodule HyperlogWeb.MessagingQueue do
     AMQP.Connection.close(connection)
   end
 
+  def send_github_project(url) do
+    {:ok, connection} = AMQP.Connection.open
+    {:ok, channel} = AMQP.Channel.open(connection)
+
+    {:ok, send_data} = Poison.encode(%{url: url})
+
+    AMQP.Queue.declare(channel, "github_project")
+    AMQP.Basic.publish(channel, "", "github_project", send_data, [content_type: "application/json"])
+    AMQP.Connection.close(connection)
+  end
+
   def send_role_data(user_id, roles, action) do
     if Mix.env() == :prod do
       {:ok, connection} = AMQP.Connection.open
