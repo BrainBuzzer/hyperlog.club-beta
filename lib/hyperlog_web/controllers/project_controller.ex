@@ -53,6 +53,8 @@ defmodule HyperlogWeb.ProjectController do
 
   def user_project_show(conn, %{"project_id" => project_id}) do
     project = Project.get_meta_data!(project_id)
-    render(conn, "show.html", project: project)
+    {:ok, mongo_conn} = Mongo.start_link(url: "mongodb://localhost:27017/hyperlog")
+    doc = Mongo.find_one(mongo_conn, "project_stats", %{url: %{"$eq": project.link}})
+    render(conn, "show.html", [project: project, project_ext: doc["languages"]])
   end
 end

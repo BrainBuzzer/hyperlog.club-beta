@@ -1,12 +1,12 @@
 <div class="container-lg p-responsive">
-<nav aria-label="Breadcrumb">
-  <ol>
-    <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
-    <li class="breadcrumb-item" aria-current="page"><%= @project.name %></li>
-  </ol>
-</nav>
-<div class="col-md-6 col-sm-12 mx-auto">
-  <a class="d-block box-shadow-medium px-3 pt-4 pb-6 position-relative rounded-1 overflow-hidden no-underline" href="<%= @project.link %>">
+<div class="col-md-4 col-sm-12 float-left p-responsive">
+  <nav aria-label="Breadcrumb">
+    <ol>
+      <li class="breadcrumb-item"><a href="/projects">Projects</a></li>
+      <li class="breadcrumb-item" aria-current="page"><%= @project.name %></li>
+    </ol>
+  </nav>
+  <a class="d-block box-shadow-medium px-3 pt-4 pb-6 mt-5 position-relative rounded-1 overflow-hidden no-underline" href="<%= @project.link %>">
     <div class="bg-blue position-absolute top-0 left-0 py-1 width-full"></div>
     <h3 class="text-gray-dark"><%= @project.name %></h3>
     <p class="text-gray">
@@ -15,13 +15,64 @@
     <ul class="position-absolute bottom-0 pb-3 text-small text-gray list-style-none ">
       <li class="d-inline-block">
         <svg class="octicon octicon-code mr-1" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"></path></svg>
-        1 Language
+        <%= length(@project_ext) %> Languages
       </li>
     </ul>
   </a>
 </div>
-
-<br/>
-
-<div class="warning-msg">This is a work in progress. We'll soon be adding the complete statistics for the project.</div>
+<div class="col-md-8 col-sm-12 float-left p-responsive">
+  <div class="p-responsive">
+    <canvas id="language-distribution" width="400" height="150"></canvas>
+  </div>
+  <%= for p <- @project_ext do %>
+    <div class="col-md-4 col-sm-12 mt-3 float-left p-responsive">
+      <div class="Box">
+        <div class="Box-header">
+          <h3 class="Box-title">
+            <%= p["name"] %>
+          </h3>
+        </div>
+        <div class="Box-body">
+          Lines of Code written: <%= p["loc"] %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script>
+const language_summary = document.getElementById('language-distribution')
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+const language_chart = new Chart(language_summary, {
+  type: 'pie',
+  data: {
+    labels: <%= raw Poison.encode!(Enum.map(@project_ext, fn x -> x["name"] end)) %>,
+    datasets: [{
+      data: <%= Poison.encode!(Enum.map(@project_ext, fn x -> x["percentage"] end)) %>,
+      backgroundColor: [
+        <%= for project <- @project_ext do %>
+          getRandomColor(),
+        <% end %>
+      ]
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Project Language Distribution",
+      fontSize: 16
+    },
+  }
+})
+</script>
