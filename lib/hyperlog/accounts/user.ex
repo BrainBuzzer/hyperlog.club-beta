@@ -3,6 +3,7 @@ defmodule Hyperlog.Accounts.User do
   import Ecto.Changeset
 
   use Pow.Ecto.Schema
+  use Pow.Extension.Ecto.Schema, extensions: [PowInvitation]
 
   schema "users" do
     pow_user_fields()
@@ -25,6 +26,7 @@ defmodule Hyperlog.Accounts.User do
     user
     |> pow_user_id_field_changeset(attrs)
     |> pow_password_changeset(attrs)
+    |> pow_extension_changeset(attrs)
     |> cast(attrs, [:name, :email, :github_connected, :discord_connected])
     |> validate_required([:name, :email, :github_connected, :discord_connected])
     |> unique_constraint(:email)
