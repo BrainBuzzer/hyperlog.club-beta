@@ -40,7 +40,7 @@
             <li><a href="#">About</a></li>
           </ul>
         </nav>
-        <a class="cta" href="<%= Routes.signup_path(@conn, :new) %>"><button class="github-button"><i class="fa fa-user-plus fa-lg"></i> Register now</button></a>
+        <a class="cta" href="<%= Routes.login_path(@conn, :new) %>"><button class="github-button"><i class="fa fa-user-plus fa-lg"></i> Login</button></a>
       <% end %>
     </header>
     <main role="main" class="container">

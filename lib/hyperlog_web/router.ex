@@ -54,8 +54,6 @@ defmodule HyperlogWeb.Router do
     pipe_through [:browser, :not_protected]
 
     get "/", PageController, :index
-    get "/signup", RegistrationController, :new, as: :signup
-    post "/signup", RegistrationController, :create, as: :signup
     get "/login", SessionController, :new, as: :login
     post "/login", SessionController, :create, as: :login
   end
