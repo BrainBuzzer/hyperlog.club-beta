@@ -12,6 +12,10 @@ defmodule HyperlogWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :admin do
+    plug HyperlogWeb.EnsureRolePlug, :admin
+  end
+
   pipeline :protected do
     plug Pow.Plug.RequireAuthenticated,
       error_handler: HyperlogWeb.AuthErrorHandler

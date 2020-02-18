@@ -10,6 +10,19 @@ defmodule Hyperlog.Accounts do
   alias Hyperlog.Accounts.User
   alias Hyperlog.Accounts.Role
 
+  def create_admin(params) do
+    %User{}
+    |> User.changeset(params)
+    |> User.changeset_role(%{role: "admin"})
+    |> Repo.insert()
+  end
+
+  def set_admin_role(user) do
+    user
+    |> User.changeset_role(%{role: "admin"})
+    |> Repo.update()
+  end
+
   @doc """
   Returns the list of users.
 

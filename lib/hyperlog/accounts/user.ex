@@ -9,6 +9,7 @@ defmodule Hyperlog.Accounts.User do
     field :discord_connected, :boolean, default: false
     field :github_connected, :boolean, default: false
     field :name, :string
+    field :role, :string, default: "user"
 
     has_one :profile, Hyperlog.Profile.User
     has_one :discord, Hyperlog.Accounts.Discord
@@ -28,5 +29,12 @@ defmodule Hyperlog.Accounts.User do
     |> validate_required([:name, :email, :github_connected, :discord_connected])
     |> unique_constraint(:email)
     |> foreign_key_constraint(:roles_id)
+  end
+
+  @spec changeset_role(Ecto.Schema.t() | Ecto.Changeset.t(), map()) :: Ecto.Changeset.t()
+  def changeset_role(user_or_changeset, attrs) do
+    user_or_changeset
+    |> Ecto.Changeset.cast(attrs, [:role])
+    |> Ecto.Changeset.validate_inclusion(:role, ~w(user admin))
   end
 end
