@@ -49,7 +49,8 @@ config :hyperlog, :pow,
   repo: Hyperlog.Repo,
   web_module: HyperlogWeb,
   routes_backend: HyperlogWeb.Pow.Routes,
-  extension: [PowInvitation]
+  extension: [PowInvitation],
+  mailer_backend: HyperlogWeb.PowMailer
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

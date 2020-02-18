@@ -1,11 +1,12 @@
 defmodule HyperlogWeb.Email do
   use Bamboo.Phoenix, view: HyperlogWeb.EmailView
 
-  def welcome_email(user) do
+  def invitation_email(user) do
     base_email()
-    |> to(user)
-    |> subject("Welcome to hyperlog.Club")
-    |> render("welcome.html")
+    |> to(user.to)
+    |> subject(user.subject)
+    |> html_body(user.html)
+    |> text_body(user.text)
   end
 
   defp base_email do
