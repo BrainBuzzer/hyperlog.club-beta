@@ -44,11 +44,7 @@ defmodule HyperlogWeb.Router do
   end
 
 
-  scope "/" do
-    pipe_through [:browser, :not_protected]
 
-    pow_extension_routes()
-  end
 
   scope "/", HyperlogWeb do
     pipe_through [:browser, :not_protected]
@@ -56,6 +52,14 @@ defmodule HyperlogWeb.Router do
     get "/", PageController, :index
     get "/login", SessionController, :new, as: :login
     post "/login", SessionController, :create, as: :login
+
+    resources "/invitations", InvitationController, only: [:edit, :update]
+  end
+
+  scope "/" do
+    pipe_through [:browser, :not_protected]
+
+    pow_extension_routes()
   end
 
   scope "/", HyperlogWeb do
