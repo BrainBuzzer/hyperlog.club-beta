@@ -3,6 +3,7 @@ defmodule HyperlogWeb.Router do
   use Plug.ErrorHandler
   use Sentry.Plug
   use Pow.Phoenix.Router
+  use Pow.Extension.Phoenix.Router, extensions: [PowInvitation]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -10,6 +11,10 @@ defmodule HyperlogWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
+
+  pipeline :admin do
+    plug HyperlogWeb.EnsureRolePlug, :admin
   end
 
   pipeline :protected do
@@ -32,14 +37,29 @@ defmodule HyperlogWeb.Router do
     get "/privacy", PageController, :privacy
   end
 
+  scope "/admin", PowInvitation.Phoenix, as: "pow_invitation" do
+    pipe_through [:browser, :protected, :admin]
+
+    resources "/invitations", InvitationController, only: [:new, :create, :show]
+  end
+
+
+
+
   scope "/", HyperlogWeb do
     pipe_through [:browser, :not_protected]
 
     get "/", PageController, :index
-    get "/signup", RegistrationController, :new, as: :signup
-    post "/signup", RegistrationController, :create, as: :signup
     get "/login", SessionController, :new, as: :login
     post "/login", SessionController, :create, as: :login
+
+    resources "/invitations", InvitationController, only: [:edit, :update]
+  end
+
+  scope "/" do
+    pipe_through [:browser, :not_protected]
+
+    pow_extension_routes()
   end
 
   scope "/", HyperlogWeb do

@@ -23,7 +23,6 @@
 
     <div>
       <%= submit "Sign In", class: "btn btn-primary btn-lg hover-grow mr-2"%>
-      <%= link "Register", to: Routes.signup_path(@conn, :new), class: "btn" %>
     </div>
   <% end %>
   </div>
