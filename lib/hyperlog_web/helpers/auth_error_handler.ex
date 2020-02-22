@@ -9,7 +9,6 @@ defmodule HyperlogWeb.AuthErrorHandler do
     |> redirect(to: Routes.login_path(conn, :new))
   end
 
-  @spec call(Conn.t(), atom()) :: Conn.t()
   def call(conn, :already_authenticated) do
     conn
     |> put_flash(:error, "You're already authenticated")
