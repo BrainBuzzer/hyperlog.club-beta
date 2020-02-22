@@ -18,7 +18,6 @@ defmodule HyperlogWeb.InvitationController do
       {:ok, user, conn} ->
         user_profile = Ecto.build_assoc(user, :profile, %Hyperlog.Profile.User{}) |> Repo.insert!
         Hyperlog.Profile.add_achievement_to_user(user_profile.id, "hello_world")
-        IO.inspect "Hello from invitation controller"
         conn
         |> put_flash(:info, "User created")
         |> redirect(to: Routes.user_path(conn, :home))

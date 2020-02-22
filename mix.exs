@@ -56,6 +56,7 @@ defmodule Hyperlog.MixProject do
       {:sentry, "~> 7.0"},
       {:jason, "~> 1.1"},
       {:mongodb, ">= 0.0.0"},
+      {:credo, "~> 1.2", only: [:dev, :test], runtime: false},
       poison: "~> 3.1"
     ]
   end
