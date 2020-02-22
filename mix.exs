@@ -52,7 +52,7 @@ defmodule Hyperlog.MixProject do
       {:earmark, "~> 1.4.3"},
       {:httpoison, "~> 1.6"},
       {:yaml_elixir, "~> 2.4.0"},
-      {:neuron, "~> 4.1.1"},
+      {:neuron, "~> 4.1.2"},
       {:sentry, "~> 7.0"},
       {:jason, "~> 1.1"},
       {:mongodb, ">= 0.0.0"},
