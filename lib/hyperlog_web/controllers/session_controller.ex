@@ -26,7 +26,7 @@ defmodule HyperlogWeb.SessionController do
   end
 
   def delete(conn, _params) do
-    {:ok, conn} = Pow.Plug.clear_authenticated_user(conn)
+    conn = Pow.Plug.delete(conn)
 
     redirect(conn, to: Routes.page_path(conn, :index))
   end

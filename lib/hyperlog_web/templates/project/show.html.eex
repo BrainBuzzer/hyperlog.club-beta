@@ -61,7 +61,7 @@ const language_chart = new Chart(language_summary, {
     datasets: [{
       data: <%= Poison.encode!(Enum.map(@project_ext, fn x -> x["percentage"] end)) %>,
       backgroundColor: [
-        <%= for project <- @project_ext do %>
+        <%= for _project <- @project_ext do %>
           getRandomColor(),
         <% end %>
       ]

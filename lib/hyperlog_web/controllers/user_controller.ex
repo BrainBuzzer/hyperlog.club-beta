@@ -72,10 +72,10 @@ defmodule HyperlogWeb.UserController do
     |> redirect(to: "/")
   end
 
-  def user_overview_page(conn, %{"username" => username}) do
-    user = Accounts.get_user_by_username(username)
-    render(conn, "overview.html", user: user)
-  end
+  # def user_overview_page(conn, %{"username" => username}) do
+    # user = Accounts.get_user_by_username(username)
+    # render(conn, "overview.html", user: user)
+  # end
 
   # defp remove_role(user, roles_id) do
   #   {:ok, user} = Accounts.unassigns_roles_from_user(user, roles_id)

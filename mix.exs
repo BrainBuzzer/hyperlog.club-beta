@@ -33,15 +33,15 @@ defmodule Hyperlog.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.12"},
+      {:phoenix, "~> 1.4.14"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.1"},
-      {:ecto_sql, "~> 3.3", override: true},
+      {:ecto_sql, "~> 3.3.4"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.13"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
-      {:pow, "~> 1.0.17"},
+      {:pow, "~> 1.0.18"},
       {:plug_cowboy, "~> 2.0"},
       {:ueberauth, "~> 0.6"},
       {:oauth2, "~> 2.0", override: true},

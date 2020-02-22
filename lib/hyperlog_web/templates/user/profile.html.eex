@@ -38,9 +38,9 @@
             This will delete your account with Hyperlog and all the details associated with it. Proceed with caution.
           </div>
         </div>
-        <%= form_for :delete_user, Routes.user_path(@conn, :delete_user_profile), fn f -> %>
+        <%= form_for :delete_user, Routes.user_path(@conn, :delete_user_profile), fn _f -> %>
           <%= submit "Delete User Account", class: "btn btn-danger" %>
-        <%= end %>
+        <% end %>
       </div>
     </div>
   </div>

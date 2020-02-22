@@ -1,7 +1,7 @@
 defmodule HyperlogWeb.Router do
   use HyperlogWeb, :router
-  use Plug.ErrorHandler
   use Sentry.Plug
+  use Plug.ErrorHandler
   use Pow.Phoenix.Router
   use Pow.Extension.Phoenix.Router, extensions: [PowInvitation]
 
@@ -43,9 +43,6 @@ defmodule HyperlogWeb.Router do
     resources "/invitations", InvitationController, only: [:new, :create, :show]
   end
 
-
-
-
   scope "/", HyperlogWeb do
     pipe_through [:browser, :not_protected]
 
@@ -70,7 +67,7 @@ defmodule HyperlogWeb.Router do
     get "/auth/:provider/", AuthController, :request
     get "/auth/:provider/callback", AuthController, :callback
 
-    get "/u/:username", UserController, :user_overview_page
+    # get "/u/:username", UserController, :user_overview_page
     get "/profile", UserController, :profile_page
     get "/profile/roles", UserController, :roles_page
     get "/home", UserController, :home
