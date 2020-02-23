@@ -2,12 +2,16 @@
   <!-- Main Content -->
   <div class="col-lg-8 col-md-12 col-sm-12 float-left p-responsive">
     <%= if @current_user.github_connected do %>
-      <div class="p-responsive">
-        <canvas id="hourlyStats" width="400" height="150"></canvas>
-      </div>
-      <div class="p-responsive">
-        <canvas id="weeklyStats" width="400" height="150"></canvas>
-      </div>
+      <%= if @user_stats["status"] == "processing" do %>
+        Processing your information
+      <% else %>
+        <div class="p-responsive">
+          <canvas id="hourlyStats" width="400" height="150"></canvas>
+        </div>
+        <div class="p-responsive">
+          <canvas id="weeklyStats" width="400" height="150"></canvas>
+        </div>
+      <% end %>
     <% else %>
       <div class="flash">
         <a href="/auth/github" class="btn btn-sm primary flash-action"><i class="fab fa-github fa-lg"></i> Connect with GitHub</a>
@@ -61,6 +65,7 @@
   </div>
 </div>
 
+<%= if @user_stats["status"] == "completed" do %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script>
 const hourlyDOM = document.getElementById("hourlyStats")
@@ -159,3 +164,4 @@ const weeklyChart = new Chart(weeklyDOM, {
   }
 })
 </script>
+<% end %>

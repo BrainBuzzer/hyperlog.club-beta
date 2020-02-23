@@ -366,6 +366,7 @@ defmodule Hyperlog.Accounts do
   def link_user_with_github(user, token) do
     user = Repo.preload(user, :profile)
     Profile.add_achievement_to_user(user.profile.id, "connect_github")
+    HyperlogWeb.MongoHelper.create_github_user(user.email)
     HyperlogWeb.MessagingQueue.send_github_token(token, user.email)
     {:ok, _} = HyperlogWeb.PullGithubData.pull_data(user.id, token)
     {:ok, user} = update_user(user, %{github_connected: true})
