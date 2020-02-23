@@ -41,6 +41,7 @@ defmodule HyperlogWeb.ProjectController do
     user = Accounts.get_user!(conn.assigns.current_user.id)
     case Project.create_project(user, project_params) do
       {:ok, project} ->
+        HyperlogWeb.MongoHelper.create_github_project(project.link)
         HyperlogWeb.MessagingQueue.send_github_project(project.link)
         conn
         |> put_flash(:info, "Project created successfully.")
@@ -55,6 +56,6 @@ defmodule HyperlogWeb.ProjectController do
     project = Project.get_meta_data!(project_id)
     {:ok, mongo_conn} = Mongo.start_link(url: "mongodb://localhost:27017/hyperlog")
     doc = Mongo.find_one(mongo_conn, "project_stats", %{url: %{"$eq": project.link}})
-    render(conn, "show.html", [project: project, project_ext: doc["languages"]])
+    render(conn, "show.html", [project: project, project_ext: doc["languages"], status: doc["status"]])
   end
 end
