@@ -376,4 +376,111 @@ defmodule Hyperlog.Accounts do
     Repo.insert! changeset
     {:ok, user}
   end
+
+  alias Hyperlog.Accounts.Wakatime
+
+  @doc """
+  Returns the list of wakatime.
+
+  ## Examples
+
+      iex> list_wakatime()
+      [%Wakatime{}, ...]
+
+  """
+  def list_wakatime do
+    Repo.all(Wakatime)
+  end
+
+  @doc """
+  Gets a single wakatime.
+
+  Raises `Ecto.NoResultsError` if the Wakatime does not exist.
+
+  ## Examples
+
+      iex> get_wakatime!(123)
+      %Wakatime{}
+
+      iex> get_wakatime!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_wakatime!(id), do: Repo.get!(Wakatime, id)
+
+  @doc """
+  Creates a wakatime.
+
+  ## Examples
+
+      iex> create_wakatime(%{field: value})
+      {:ok, %Wakatime{}}
+
+      iex> create_wakatime(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_wakatime(attrs \\ %{}) do
+    %Wakatime{}
+    |> Wakatime.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a wakatime.
+
+  ## Examples
+
+      iex> update_wakatime(wakatime, %{field: new_value})
+      {:ok, %Wakatime{}}
+
+      iex> update_wakatime(wakatime, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_wakatime(%Wakatime{} = wakatime, attrs) do
+    wakatime
+    |> Wakatime.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a wakatime.
+
+  ## Examples
+
+      iex> delete_wakatime(wakatime)
+      {:ok, %Wakatime{}}
+
+      iex> delete_wakatime(wakatime)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_wakatime(%Wakatime{} = wakatime) do
+    Repo.delete(wakatime)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking wakatime changes.
+
+  ## Examples
+
+      iex> change_wakatime(wakatime)
+      %Ecto.Changeset{source: %Wakatime{}}
+
+  """
+  def change_wakatime(%Wakatime{} = wakatime) do
+    Wakatime.changeset(wakatime, %{})
+  end
+
+  def link_user_with_wakatime(user, credentials) do
+    user = Repo.preload(user, :profile)
+    {:ok, user} = update_user(user, %{wakatime_connected: true})
+    changeset = Ecto.build_assoc(user, :wakatime, %Wakatime{
+      access_token: credentials.token,
+      refresh_token: credentials.refresh_token
+    })
+    Repo.insert! changeset
+    {:ok, user}
+  end
 end

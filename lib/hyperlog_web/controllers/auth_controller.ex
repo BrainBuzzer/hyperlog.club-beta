@@ -15,7 +15,7 @@ defmodule HyperlogWeb.AuthController do
     case auth.provider do
       :github ->
         with {:ok, user} <- Accounts.link_user_with_github(Pow.Plug.current_user(conn), auth.credentials.token) do
-          sign_in_user(user, conn)
+          sign_in_user(user, conn, :github)
         end
       :discord ->
         with {:ok, user} <- Accounts.get_user_by_email(%{email: Pow.Plug.current_user(conn).email}) do
@@ -27,13 +27,24 @@ defmodule HyperlogWeb.AuthController do
             connect_discord(user, auth, conn)
           end
         end
+      :wakatime ->
+        with {:ok, user} <- Accounts.link_user_with_wakatime(Pow.Plug.current_user(conn), auth.credentials) do
+          sign_in_user(user, conn, :wakatime)
+        end
     end
   end
 
-  defp sign_in_user(user, conn) do
+  defp sign_in_user(user, conn, :github) do
     conn
     |> sync_user(user)
     |> put_flash(:info, "Github Connected Successfully.")
+    |> redirect(to: "/home")
+  end
+
+  defp sign_in_user(user, conn, :wakatime) do
+    conn
+    |> sync_user(user)
+    |> put_flash(:info, "Wakatime Connected Successfully.")
     |> redirect(to: "/home")
   end
 

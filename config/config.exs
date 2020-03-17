@@ -32,7 +32,8 @@ config :phoenix, :json_library, Jason
 config :ueberauth, Ueberauth,
   providers: [
     github: {Ueberauth.Strategy.Github, [default_scope: "read:user,user:email,public_repo"]},
-    discord: {Ueberauth.Strategy.Discord, [default_scope: "identify email guilds guilds.join messages.read"]}
+    discord: {Ueberauth.Strategy.Discord, [default_scope: "identify email guilds guilds.join messages.read"]},
+    wakatime: {Ueberauth.Strategy.Wakatime, [default_scope: "email,read_logged_time,read_stats"]}
   ]
 
 config :ueberauth, Ueberauth.Strategy.Github.OAuth,
@@ -43,6 +44,10 @@ config :ueberauth, Ueberauth.Strategy.Discord.OAuth,
   client_id: System.get_env("DISCORD_CLIENT_ID"),
   client_secret: System.get_env("DISCORD_CLIENT_SECRET"),
   redirect_uri: System.get_env("DISCORD_REDIRECT_URI")
+
+config :ueberauth, Ueberauth.Strategy.Wakatime.OAuth,
+  client_id: System.get_env("WAKATIME_CLIENT_ID"),
+  client_secret: System.get_env("WAKATIME_CLIENT_SECRET")
 
 config :hyperlog, :pow,
   user: Hyperlog.Accounts.User,

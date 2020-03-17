@@ -9,12 +9,14 @@ defmodule Hyperlog.Accounts.User do
     pow_user_fields()
     field :discord_connected, :boolean, default: false
     field :github_connected, :boolean, default: false
+    field :wakatime_connected, :boolean, default: false
     field :name, :string
     field :role, :string, default: "user"
 
     has_one :profile, Hyperlog.Profile.User
     has_one :discord, Hyperlog.Accounts.Discord
     has_one :github, Hyperlog.Accounts.Github
+    has_one :wakatime, Hyperlog.Accounts.Wakatime
     has_many :projects, Hyperlog.Project.MetaData
     many_to_many :roles, Hyperlog.Accounts.Role, join_through: "users_roles", on_replace: :delete
 
@@ -27,8 +29,8 @@ defmodule Hyperlog.Accounts.User do
     |> pow_user_id_field_changeset(attrs)
     |> pow_password_changeset(attrs)
     |> pow_extension_changeset(attrs)
-    |> cast(attrs, [:name, :email, :github_connected, :discord_connected])
-    |> validate_required([:name, :email, :github_connected, :discord_connected])
+    |> cast(attrs, [:name, :email, :github_connected, :discord_connected, :wakatime_connected])
+    |> validate_required([:name, :email, :github_connected, :discord_connected, :wakatime_connected])
     |> unique_constraint(:email)
     |> foreign_key_constraint(:roles_id)
   end

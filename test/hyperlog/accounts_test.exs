@@ -197,4 +197,65 @@ defmodule Hyperlog.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_github(github)
     end
   end
+
+  describe "wakatime" do
+    alias Hyperlog.Accounts.Wakatime
+
+    @valid_attrs %{access_token: "some access_token", refresh_token: "some refresh_token"}
+    @update_attrs %{access_token: "some updated access_token", refresh_token: "some updated refresh_token"}
+    @invalid_attrs %{access_token: nil, refresh_token: nil}
+
+    def wakatime_fixture(attrs \\ %{}) do
+      {:ok, wakatime} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_wakatime()
+
+      wakatime
+    end
+
+    test "list_wakatime/0 returns all wakatime" do
+      wakatime = wakatime_fixture()
+      assert Accounts.list_wakatime() == [wakatime]
+    end
+
+    test "get_wakatime!/1 returns the wakatime with given id" do
+      wakatime = wakatime_fixture()
+      assert Accounts.get_wakatime!(wakatime.id) == wakatime
+    end
+
+    test "create_wakatime/1 with valid data creates a wakatime" do
+      assert {:ok, %Wakatime{} = wakatime} = Accounts.create_wakatime(@valid_attrs)
+      assert wakatime.access_token == "some access_token"
+      assert wakatime.refresh_token == "some refresh_token"
+    end
+
+    test "create_wakatime/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_wakatime(@invalid_attrs)
+    end
+
+    test "update_wakatime/2 with valid data updates the wakatime" do
+      wakatime = wakatime_fixture()
+      assert {:ok, %Wakatime{} = wakatime} = Accounts.update_wakatime(wakatime, @update_attrs)
+      assert wakatime.access_token == "some updated access_token"
+      assert wakatime.refresh_token == "some updated refresh_token"
+    end
+
+    test "update_wakatime/2 with invalid data returns error changeset" do
+      wakatime = wakatime_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_wakatime(wakatime, @invalid_attrs)
+      assert wakatime == Accounts.get_wakatime!(wakatime.id)
+    end
+
+    test "delete_wakatime/1 deletes the wakatime" do
+      wakatime = wakatime_fixture()
+      assert {:ok, %Wakatime{}} = Accounts.delete_wakatime(wakatime)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_wakatime!(wakatime.id) end
+    end
+
+    test "change_wakatime/1 returns a wakatime changeset" do
+      wakatime = wakatime_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_wakatime(wakatime)
+    end
+  end
 end
