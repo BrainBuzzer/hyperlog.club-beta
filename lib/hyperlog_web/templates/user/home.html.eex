@@ -38,6 +38,13 @@
           <a href="/auth/discord" class="btn btn-large btn-block btn-outline"><i class="fab fa-discord fa-lg"></i> Connect to Discord</a>
         <% end %>
       </div>
+      <div class="Box-row d-flex flex-justify-center">
+        <%= if @current_user.wakatime_connected do %>
+          <button class="btn btn-large btn-block" type="button" aria-disabled="true"><i class="fas fa-clock fa-lg"></i> Wakatime Connected</button>
+        <% else %>
+          <a href="/auth/github" class="btn btn-large btn-block"><i class="fas fa-clock fa-lg"></i> Connect to Wakatime</a>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
