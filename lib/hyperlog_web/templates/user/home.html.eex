@@ -19,29 +19,6 @@
       </div>
     <% end %>
     <!-- Info Flash Section -->
-
-    <!-- List courses -->
-    <section class="d-flex flex-column mt-5">
-      <div class="container-lg">
-        <div class="h1">Checkout the courses</div>
-        <div class="text-gray">We have curated some courses to make learning fun. These courses also increase your XPs if you are a beginner. So be sure to check them out!</div>
-      </div>
-      <div class="course-list mt-3">
-        <a class="course-list__item" href="/courses/javascript/intro/getting-started">
-          <div class="course-list__item__image">
-            <img src="<%= Routes.static_path(@conn, "/images/javascript-logo.svg") %>" alt="JavaScript Logo" />
-          </div>
-          <div class="course-list__item__info">
-            <div class="h2 text-gray-dark">
-              JavaScript Course <span title="Label: orange label" class="Label Label--orange"><i class="fa fa-exclamation-triangle"></i> Work in Progress</span>
-            </div>
-            <div class="f4 text-gray">
-              Learn from the basics to complete advanced level and become a JavaScript Ninja.
-            </div>
-          </div>
-        </a>
-      </div>
-    </section>
   </div>
 
   <!-- Github and Discord connection -->
