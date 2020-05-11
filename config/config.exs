@@ -15,7 +15,7 @@ config :hyperlog, HyperlogWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "+SXQYsLC/+S7QN8hZGqO/yH5tJDp0DLMZrBS3WMGIn2Z5XRtztRJcS558+69rv6y",
   render_errors: [view: HyperlogWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Hyperlog.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub_server: Hyperlog.PubSub
 
 # Configures Elixir's Logger
 config :logger, :console,

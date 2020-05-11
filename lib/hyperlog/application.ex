@@ -10,6 +10,7 @@ defmodule Hyperlog.Application do
     children = [
       # Start the Ecto repository
       Hyperlog.Repo,
+      {Phoenix.PubSub, name: Hyperlog.PubSub},
       # Start the endpoint when the application starts
       HyperlogWeb.Endpoint
       # Starts a worker by calling: Hyperlog.Worker.start_link(arg)
