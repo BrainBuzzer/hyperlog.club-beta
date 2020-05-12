@@ -32,15 +32,15 @@ defmodule HyperlogWeb.InvitationController do
   defdelegate require_not_authenticated(conn, opts), to: Pow.Phoenix.Controller
 
   defp load_user_from_invitation_token(%{params: %{"id" => token}} = conn, _opts) do
-    case Plug.invited_user_from_token(conn, token) do
-      nil  ->
+    case Plug.load_invited_user_by_token(conn, token) do
+      {:error, conn}  ->
         conn
         |> put_flash(:error, "Invalid invitation")
         |> redirect(to: Routes.login_path(conn, :new))
         |> halt()
 
-      user ->
-        Plug.assign_invited_user(conn, user)
+      {:ok, conn} ->
+        conn
     end
   end
 end
